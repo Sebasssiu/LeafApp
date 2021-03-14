@@ -5,7 +5,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background: #fff;
+  background: rgb(3, 5, 12);
 }
 .subscriptionCard {
   min-height: 50vh;
@@ -54,7 +54,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: rgb(3, 5, 12);
+  background: #fff;
 }
 .menu::after {
   content: "";
