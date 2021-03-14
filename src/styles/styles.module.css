@@ -1,0 +1,91 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+.subscriptionCard {
+  min-height: 50vh;
+  width: 300px;
+  border-radius: 20px;
+  margin: 10px;
+}
+.subscriptionCardFront {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  width: 100%;
+  border-radius: 20px 20px 0px 0px;
+}
+.h1 {
+  font-size: 30px;
+  color: white;
+  font-weight: 800;
+}
+.h3 {
+  font-size: 15px;
+  color: grey;
+}
+.price {
+  width: 100%;
+  font-size: 40px;
+  text-align: center;
+}
+.subsCardItems {
+  display: flex;
+  flex-direction: row;
+  margin: 20px;
+  border-bottom-style: solid;
+}
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.menu {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgb(3, 5, 12);
+}
+.menu::after {
+  content: "";
+  width: 250px;
+  height: 250px;
+  align-self: flex-start;
+  border-radius: 50% 0% 50% 0%;
+  background: rgb(6, 182, 6);
+}
+.menu::before {
+  content: "";
+  width: 250px;
+  height: 250px;
+  align-self: flex-end;
+  vertical-align: bottom;
+  border-radius: 50% 0% 50% 0%;
+  background: rgb(6, 182, 6);
+}
+.title {
+  color: rgb(6, 182, 6);
+  font-size: 50px;
+  margin-top: 200px;
+  margin-bottom: 200px;
+}
+
+.menuBarContainer {
+  position: absolute;
+  min-height: 10vh;
+  background: red;
+}
+
+.prueba {
+  color: rgb(0, 139, 46);
+}
