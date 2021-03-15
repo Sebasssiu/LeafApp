@@ -3,6 +3,7 @@ import styles from '../styles/styles.module.css'
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import Button from "@material-ui/core/Button";
+
 const SubscriptionCard = (props) =>{
     const innerStyles = {                                                                                               
         container:{
