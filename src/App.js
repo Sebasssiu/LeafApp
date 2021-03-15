@@ -6,7 +6,7 @@ import Login from './views/login'
 export const UserContext = createContext()
 
 const App = () => {
-  const [token, setToken] = useState('22')
+  const [token, setToken] = useState('')
   return (
     <UserContext.Provider value={{token: token, setToken: setToken}}>
       <Router>
