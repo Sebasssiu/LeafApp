@@ -10,15 +10,28 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import useApi from '../customHooks/useApi'
-import "../styles/login.css";
+import useApi from '../customHooks/useApi';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Collapse from '@material-ui/core/Collapse';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
+import SendIcon from '@material-ui/icons/Send';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import StarBorder from '@material-ui/icons/StarBorder';
+import "../styles/search.css";
 
 
 const Search = () => {
     const [search, setSearch] = useState({ artist: '', song: '', link:'' })
     const token = useContext(UserContext)
     const linkSearch = 'search'
-    const songData = useApi({
+    const datos = {artist:'Reik', song:'Si me dices que si', link:'https://www.youtube.com/embed/ieodxKMYRf8'}
+    /*const songData = useApi({
         link: linkSearch,
         method: 'GET',
         token: token,
@@ -26,22 +39,30 @@ const Search = () => {
     })
     const songDataJson = songData.json()
     setSearch({ artist: songDataJson.artist, song: songDataJson.song, link: songDataJson.songLink})
+    */
 
+    let linkCancion = datos.link + "?autoplay=1&mute=0"
 
     return (
         <div className='background'>
-            <div className='leftSideMenu'>
-                <div className='artistData'>
-                </div>
-                <div className='songsData'>
-                </div>
-            </div>
+            <List 
+                component="nav"
+                aria-labelledby="nested-list-subheader"
+                subheader={
+                  <ListSubheader component="div" id="nested-list-subheader" className='listHeader'>
+                    Otras busquedas
+                  </ListSubheader>
+                }
+                className='leftSideMenu'
+              >
+            </List>
             <div className='rightSideSearchData'>
-                <h1>{search.song}</h1>
-                <h2>{search.artist}</h2>
-                <iframe width="560" height="315" src={search.link} frameborder="0" 
-                allow="autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <h3>{datos.artist}</h3>
+                <h2>{datos.song}</h2>
+                <iframe width="600" height="300" src={linkCancion} 
+                frameBorder="0" ></iframe>
             </div>
         </div>
     )
 }
+export default Search
