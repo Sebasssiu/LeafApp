@@ -3,6 +3,10 @@ import {useEffect, useState} from 'react'
 const useApi = ({ link, method, token, body, call}) =>{
     const [data, setData] = useState({fetchedData: {}, isLoading: true})
     useEffect(() =>{
+        console.log(body.username.length)
+        console.log(body.password.length)
+        console.log(body.username)
+        console.log(body.password)
         fetch(`https://leaf-musicapp.herokuapp.com/${link}`,{
             method: method,
             mode: 'cors',

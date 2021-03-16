@@ -3,6 +3,7 @@ import styles from '../styles/styles.module.css'
 import SubscriptionCard from '../components/subscriptionCard'
 import NavBar from '../components/NavBar'
 import { UserContext } from '../App'
+import { useHistory } from 'react-router-dom'
 
 const data = [
   "Listen music",
@@ -12,14 +13,22 @@ const data = [
 
 const Main = () =>{
   const token = useContext(UserContext)
+  const history = useHistory()
   return(
     <>
       <NavBar token={token}/>
       <div className={styles.menu}>
         <h1 className={styles.title}>La música es el vino que llena la copa del silencio</h1>
-        <button className={styles.signup}>
-          Join us
-        </button>
+        {!token.token ? (
+          <button className={styles.signup} onClick={() => history.push('/signup')}>
+            Join us
+          </button>
+        ) : (
+          <button className={styles.signup} onClick={() => history.push('/music')}>
+            Listen now
+          </button>
+        )
+        }
       </div>
       <div className={styles.container}>
         <SubscriptionCard 

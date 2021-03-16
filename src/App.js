@@ -3,6 +3,7 @@ import Main from './views/main'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Login from './views/login'
 import Profile from './views/profile'
+import SignUp from './views/signup'
 
 export const UserContext = createContext()
 
@@ -20,6 +21,12 @@ const App = () => {
           </Route>
           <Route exact path="/profile">
             <Profile />
+          </Route>
+          <Route exact path="/signup">
+            <SignUp />
+          </Route>
+          <Route exact path="/music">
+            <SignUp />
           </Route>
         </Switch>
       </Router>
