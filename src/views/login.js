@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const Login = () => {
-    let history = useHistory()
+    const history = useHistory()
     const [isLogin, setIsLogin] = useState(false)
     const [creadentials, setCredentials] = useState({ user: '', pass: '' })
     const token = useContext(UserContext)
