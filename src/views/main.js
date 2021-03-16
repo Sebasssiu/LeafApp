@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styles from '../styles/styles.module.css'
 import SubscriptionCard from '../components/subscriptionCard'
 import NavBar from '../components/NavBar'
-import Button from "@material-ui/core/Button";
+import { UserContext } from '../App'
 
 const data = [
   "Listen music",
@@ -11,9 +11,10 @@ const data = [
 ]
 
 const Main = () =>{
+  const token = useContext(UserContext)
   return(
-    <React.Fragment>
-      <NavBar/>
+    <>
+      <NavBar token={token}/>
       <div className={styles.menu}>
         <h1 className={styles.title}>La música es el vino que llena la copa del silencio</h1>
         <button className={styles.signup}>
@@ -36,7 +37,7 @@ const Main = () =>{
           price={"10.99"}
         />
       </div>
-    </React.Fragment>
+    </>
   )
 }
 export default Main

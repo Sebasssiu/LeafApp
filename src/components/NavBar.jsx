@@ -1,8 +1,7 @@
-import React from "react";
-import "../styles/navBarStyle.css";
+import React from "react"
+import "../styles/navBarStyle.css"
 import { Link } from 'react-router-dom'
-
-const NavBar = () => {
+const NavBar = ({ token }) => {
   return (
     <header className="navbox">
       <img src="/bitfinex-leaf.svg" alt="logo" className="logo" />
@@ -17,18 +16,30 @@ const NavBar = () => {
           <li>
             <a href="/">Contact Us</a>
           </li>
-          <li>
-            <a href="/">
+          {token.token ? (
+            <>
+              <li>
+                <Link to="/profile">My account</Link>
+              </li>
+              <li>
+                <Link to="/music">Music player</Link>
+              </li>
+              <li>
+                <a onClick={() => localStorage.clear()} href="/">Log out</a>
+              </li>
+            </>
+          ) : (
+            <li>
               <Link to="/login">Login</Link>
-            </a>
-          </li>
+            </li>
+          )
+          }
         </ul>
       </nav>
       <a href="/#" className="prembutton">
         <button>PREMIUM</button>
       </a>
     </header>
-  );
-};
-
+  )
+}
 export default NavBar;
