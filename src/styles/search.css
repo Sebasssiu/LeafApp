@@ -29,7 +29,6 @@
     border-color: grey;
 }
 
-.listHeader{
-    color: rgb(6, 182, 6);
-    font-style: rgb(6, 182, 6);
+.searchBar{
+    width: 150px;
 }

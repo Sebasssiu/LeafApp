@@ -24,38 +24,74 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import "../styles/search.css";
+import { green } from '@material-ui/core/colors';
+import PlayCircleFilledWhiteTwoToneIcon from '@material-ui/icons/PlayCircleFilledWhiteTwoTone';
+import { SettingsPowerRounded } from '@material-ui/icons';
 
 
 const Search = () => {
     const [search, setSearch] = useState({ artist: '', song: '', link:'' })
     const token = useContext(UserContext)
-    const linkSearch = 'search'
+    const linkSearch = 'genres'
     const datos = {artist:'Reik', song:'Si me dices que si', link:'https://www.youtube.com/embed/ieodxKMYRf8'}
-    /*const songData = useApi({
+    const songData = useApi({
         link: linkSearch,
         method: 'GET',
         token: token,
         call: search
     })
-    const songDataJson = songData.json()
+    console.log(songData)
+    /*const songDataJson = songData.json()
     setSearch({ artist: songDataJson.artist, song: songDataJson.song, link: songDataJson.songLink})
     */
 
     let linkCancion = datos.link + "?autoplay=1&mute=0"
+    const [open, setOpen] = React.useState(true);
+
+    const styleHeaderList = {
+        color: 'rgb(6, 182, 6)',
+        fontSize: '0.875rem',
+        boxSizing: 'border-box',
+        listStyle: 'none',
+        fontFamily: "Roboto",
+        fontWeight: '500',
+        lineHeight: '48px'
+    }
+
+    const handleClick = () => {
+        setOpen(!open)
+    }
 
     return (
         <div className='background'>
-            <List 
-                component="nav"
-                aria-labelledby="nested-list-subheader"
-                subheader={
-                  <ListSubheader component="div" id="nested-list-subheader" className='listHeader'>
-                    Otras busquedas
-                  </ListSubheader>
-                }
-                className='leftSideMenu'
-              >
-            </List>
+            <div className='lefSideMenu'>
+                <input className='searchBar' placeholder="Search song"></input>
+                <List 
+                    component="nav"
+                    aria-labelledby="nested-list-subheader"
+                    subheader={
+                    <ListSubheader style={styleHeaderList} component="div" id="nested-list-subheader" className='listHeader' >
+                        Generos
+                    </ListSubheader>
+                    }
+                    className='listaGeneros'
+                >
+                    <ListItem button onClick={handleClick}>
+                        <ListItemText primary="Clasica" />
+                        {open ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                            <ListItem button className='SongLabel' >
+                                <ListItemText primary="Cancion" />{/*cancion que jala de la base*/}
+                                <ListItemIcon>
+                                    <PlayCircleFilledWhiteTwoToneIcon style={{ color: green[500], fontSize: 30}}/>
+                                </ListItemIcon>
+                            </ListItem>
+                        </List>
+                    </Collapse>
+                </List>
+            </div>
             <div className='rightSideSearchData'>
                 <h3>{datos.artist}</h3>
                 <h2>{datos.song}</h2>
