@@ -34,18 +34,19 @@ const Search = () => {
     const token = useContext(UserContext)
     const linkSearch = 'genres'
     const datos = {artist:'Reik', song:'Si me dices que si', link:'https://www.youtube.com/embed/ieodxKMYRf8'}
+    console.log(linkSearch+ '-' + token)
     const songData = useApi({
         link: linkSearch,
         method: 'GET',
-        token: token,
-        call: search
+        token: token
     })
-    console.log(songData)
-    /*const songDataJson = songData.json()
+    /*console.log(songData)
+    const songDataJson = songData.json()
     setSearch({ artist: songDataJson.artist, song: songDataJson.song, link: songDataJson.songLink})
     */
 
     let linkCancion = datos.link + "?autoplay=1&mute=0"
+    console.log(linkCancion)
     const [open, setOpen] = React.useState(true);
 
     const styleHeaderList = {
@@ -66,6 +67,7 @@ const Search = () => {
         <div className='background'>
             <div className='lefSideMenu'>
                 <input className='searchBar' placeholder="Search song"></input>
+                <button className='searchSongButton'>Search</button>
                 <List 
                     component="nav"
                     aria-labelledby="nested-list-subheader"
