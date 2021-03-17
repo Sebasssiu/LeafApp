@@ -32,16 +32,16 @@ import { SettingsPowerRounded } from '@material-ui/icons';
 const Search = () => {
     const [search, setSearch] = useState({ artist: '', song: '', link:'' })
     const token = useContext(UserContext)
-    const linkSearch = 'genres'
+    const linkSearch = 'genres/'
     const datos = {artist:'Reik', song:'Si me dices que si', link:'https://www.youtube.com/embed/ieodxKMYRf8'}
-    console.log(linkSearch+ '-' + token)
-    const songData = useApi({
+    const data = useApi({
         link: linkSearch,
         method: 'GET',
         token: token
     })
-    /*console.log(songData)
-    const songDataJson = songData.json()
+    const songData = data.fetchedData
+    console.log(songData)
+    /*const songDataJson = songData.json()
     setSearch({ artist: songDataJson.artist, song: songDataJson.song, link: songDataJson.songLink})
     */
 
