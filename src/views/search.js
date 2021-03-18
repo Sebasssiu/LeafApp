@@ -98,42 +98,8 @@ const Search = () => {
     if(data.isLoading )
     {
         return (
-            <div className='background'>
-                <div className='lefSideMenu'>
-                    <input className='searchBar' placeholder="Search song" onChange={changeInput}></input>
-                    <button className='searchSongButton' onClick={searchfunction}>Search</button>
-                    <List 
-                        component="nav"
-                        aria-labelledby="nested-list-subheader"
-                        subheader={
-                        <ListSubheader style={styleHeaderList} component="div" id="nested-list-subheader" className='listHeader' >
-                            Generos
-                        </ListSubheader>
-                        }
-                        className='listaGeneros'
-                    >
-                        <ListItem button onClick={handleClick}>
-                            <ListItemText primary={generos.name} />
-                            {open ? <ExpandLess /> : <ExpandMore />}
-                        </ListItem>
-                        <Collapse in={open} timeout="auto" unmountOnExit>
-                            <List component="div" disablePadding>
-                                <ListItem button className='SongLabel' >
-                                    <ListItemText primary='cancion' />{/*cancion que jala de la base*/}
-                                    <ListItemIcon>
-                                        <PlayCircleFilledWhiteTwoToneIcon style={{ color: green[500], fontSize: 30}}/>
-                                    </ListItemIcon>
-                                </ListItem>
-                            </List>
-                        </Collapse>
-                    </List>
-                </div>
-                <div className='rightSideSearchData'>
-                    <h3>{search.artist}</h3>
-                    <h2>{search.song}</h2>
-                    <iframe width="600" height="300" src={linkCancion} 
-                    frameBorder="10" ></iframe>
-                </div>
+            <div>
+                <h1>is loading</h1>
             </div>
         )
     } else{
@@ -153,11 +119,11 @@ const Search = () => {
                         }
                         className='listaGeneros'
                     >
-                        {generos.map( (genero) => {
+                        {data.fetchedData.map( (genero) => {
                             console.log(genero.name)
                             return (
                                 <>
-                                <ListItem button onClick={handleClick}>
+                                <ListItem button onClick={handleClick} id={genero.id}>
                                     <ListItemText primary={genero.name} />
                                     {open ? <ExpandLess /> : <ExpandMore />}
                                 </ListItem>
@@ -177,8 +143,8 @@ const Search = () => {
                                             } )
                                         }
                                     </List>
-                                </Collapse>
-                                </>
+                                </Collapse>                             
+                            </>
                             )
                         } )
                         }
