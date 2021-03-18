@@ -3,8 +3,10 @@ import styles from '../styles/styles.module.css'
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import Button from "@material-ui/core/Button";
+import { useHistory } from 'react-router-dom'
 
 const SubscriptionCard = (props) =>{
+    const history = useHistory()
     const innerStyles = {                                                                                               
         container:{
             background: props.background
@@ -48,7 +50,7 @@ const SubscriptionCard = (props) =>{
             })}
             <h1 className={styles.price} style={innerStyles.price}>${props.price}</h1>
             <div className={styles.button}>
-                <Button style={innerStyles.button} variant="contained">
+                <Button style={innerStyles.button} variant="contained" onClick={() => history.push({pathname: '/premium', state: props})}>
                     Buy
                 </Button>
             </div>

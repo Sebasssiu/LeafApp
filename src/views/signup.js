@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import '../styles/signup.css'
+import '../styles/inputPages.css'
 import PersonIcon from '@material-ui/icons/Person';
 import LockIcon from '@material-ui/icons/Lock';
 import { green } from '@material-ui/core/colors';

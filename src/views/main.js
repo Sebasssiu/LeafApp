@@ -24,7 +24,7 @@ const Main = () =>{
             Join us
           </button>
         ) : (
-          <button className={styles.signup} onClick={() => history.push('/music')}>
+          <button className={styles.signup} onClick={() => history.push('/search')}>
             Listen now
           </button>
         )

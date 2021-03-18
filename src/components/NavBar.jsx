@@ -22,7 +22,7 @@ const NavBar = ({ token }) => {
                 <Link to="/profile">My account</Link>
               </li>
               <li>
-                <Link to="/music">Music player</Link>
+                <Link to="/search">Music player</Link>
               </li>
               <li>
                 <a onClick={() => localStorage.clear()} href="/">Log out</a>
