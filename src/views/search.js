@@ -30,10 +30,12 @@ import { SettingsPowerRounded } from '@material-ui/icons';
 
 
 const Search = () => {
-    const [search, setSearch] = useState({ artist: '', song: '', link:'' })
-    //const [generos, setGeneros] = useState([])
+    const [search, setSearch] = useState({artist:'Reik', song:'Si me dices que si', link:'https://www.youtube.com/embed/ieodxKMYRf8'})
+    const [songUser, setSongUser] = useState('piano')
+    const [generos, setGeneros] = useState([{ name: 'pop', songs:[{ name:'si me dices que si', link:'https://www.youtube.com/embed/ieodxKMYRf8'}]} ])
     const token = useContext(UserContext)
     const linkSearch = 'genres/'
+    let count = 0
     const datos = {artist:'Reik', song:'Si me dices que si', link:'https://www.youtube.com/embed/ieodxKMYRf8'}
     const data = useApi({
         link: linkSearch,
@@ -41,14 +43,23 @@ const Search = () => {
         token: token
     })
     const songData = data.fetchedData
-    //setGeneros(songData)
     console.log(songData)
-    console.log(songData[0])
+    
+    if (count == 0) {
+        console.log('entro')
+        console.log(generos)
+        //setGeneros(songData)
+        count+=1
+    }
+    const genero1 = songData[0]
+    console.log(genero1)
+    
+    //console.log(genero1.name)
     /*const songDataJson = songData.json()
     setSearch({ artist: songDataJson.artist, song: songDataJson.song, link: songDataJson.songLink})
     */
 
-    let linkCancion = datos.link + "?autoplay=1&mute=0"
+    let linkCancion = search.link + "?autoplay=1&mute=0"
     console.log(linkCancion)
     const [open, setOpen] = React.useState(true);
 
@@ -66,44 +77,122 @@ const Search = () => {
         setOpen(!open)
     }
 
-    return (
-        <div className='background'>
-            <div className='lefSideMenu'>
-                <input className='searchBar' placeholder="Search song"></input>
-                <button className='searchSongButton'>Search</button>
-                <List 
-                    component="nav"
-                    aria-labelledby="nested-list-subheader"
-                    subheader={
-                    <ListSubheader style={styleHeaderList} component="div" id="nested-list-subheader" className='listHeader' >
-                        Generos
-                    </ListSubheader>
-                    }
-                    className='listaGeneros'
-                >
-                    <ListItem button onClick={handleClick}>
-                        <ListItemText primary="Clasica" />
-                        {open ? <ExpandLess /> : <ExpandMore />}
-                    </ListItem>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding>
-                            <ListItem button className='SongLabel' >
-                                <ListItemText primary="Cancion" />{/*cancion que jala de la base*/}
-                                <ListItemIcon>
-                                    <PlayCircleFilledWhiteTwoToneIcon style={{ color: green[500], fontSize: 30}}/>
-                                </ListItemIcon>
-                            </ListItem>
-                        </List>
-                    </Collapse>
-                </List>
+    const searchfunction = () => {
+        setSearch({artisti: '', song: info[0].name , link: info[0].link })
+        //console.log(info[0].user)
+        console.log(info[0].name)
+        console.log(info[0].link)
+    }
+
+    const linksearch = 'songs/?search='+songUser
+        const info = useApi({
+            link:linksearch,
+            method: 'GET' ,
+            token:token
+        }).fetchedData
+
+    const changeInput = (e) => {
+        setSongUser(e.target.value)
+    }
+
+    if(data.isLoading )
+    {
+        return (
+            <div className='background'>
+                <div className='lefSideMenu'>
+                    <input className='searchBar' placeholder="Search song" onChange={changeInput}></input>
+                    <button className='searchSongButton' onClick={searchfunction}>Search</button>
+                    <List 
+                        component="nav"
+                        aria-labelledby="nested-list-subheader"
+                        subheader={
+                        <ListSubheader style={styleHeaderList} component="div" id="nested-list-subheader" className='listHeader' >
+                            Generos
+                        </ListSubheader>
+                        }
+                        className='listaGeneros'
+                    >
+                        <ListItem button onClick={handleClick}>
+                            <ListItemText primary={generos.name} />
+                            {open ? <ExpandLess /> : <ExpandMore />}
+                        </ListItem>
+                        <Collapse in={open} timeout="auto" unmountOnExit>
+                            <List component="div" disablePadding>
+                                <ListItem button className='SongLabel' >
+                                    <ListItemText primary='cancion' />{/*cancion que jala de la base*/}
+                                    <ListItemIcon>
+                                        <PlayCircleFilledWhiteTwoToneIcon style={{ color: green[500], fontSize: 30}}/>
+                                    </ListItemIcon>
+                                </ListItem>
+                            </List>
+                        </Collapse>
+                    </List>
+                </div>
+                <div className='rightSideSearchData'>
+                    <h3>{search.artist}</h3>
+                    <h2>{search.song}</h2>
+                    <iframe width="600" height="300" src={linkCancion} 
+                    frameBorder="10" ></iframe>
+                </div>
             </div>
-            <div className='rightSideSearchData'>
-                <h3>{datos.artist}</h3>
-                <h2>{datos.song}</h2>
-                <iframe width="600" height="300" src={linkCancion} 
-                frameBorder="0" ></iframe>
+        )
+    } else{
+
+        return (
+            <div className='background'>
+                <div className='lefSideMenu'>
+                    <input className='searchBar' placeholder="Search song" onChange={changeInput}></input>
+                    <button className='searchSongButton' onClick={searchfunction}>Search</button>
+                    <List 
+                        component="nav"
+                        aria-labelledby="nested-list-subheader"
+                        subheader={
+                        <ListSubheader style={styleHeaderList} component="div" id="nested-list-subheader" className='listHeader' >
+                            Generos
+                        </ListSubheader>
+                        }
+                        className='listaGeneros'
+                    >
+                        {generos.map( (genero) => {
+                            console.log(genero.name)
+                            return (
+                                <>
+                                <ListItem button onClick={handleClick}>
+                                    <ListItemText primary={genero.name} />
+                                    {open ? <ExpandLess /> : <ExpandMore />}
+                                </ListItem>
+                                <Collapse in={open} timeout="auto" unmountOnExit>
+                                    <List component="div" disablePadding>
+                                        {
+                                            genero.songs.map( (song) => {
+                                                
+                                                return (
+                                                    <ListItem button className='SongLabel' >
+                                                        <ListItemText primary={song.name} />{/*cancion que jala de la base*/}
+                                                        <ListItemIcon>
+                                                            <PlayCircleFilledWhiteTwoToneIcon style={{ color: green[500], fontSize: 30}}/>
+                                                        </ListItemIcon>
+                                                    </ListItem>
+                                                )
+                                            } )
+                                        }
+                                    </List>
+                                </Collapse>
+                                </>
+                            )
+                        } )
+                        }
+                        
+                    </List>
+                </div>
+                <div className='rightSideSearchData'>
+                    <h3>{search.artist}</h3>
+                    <h2>{search.song}</h2>
+                    <iframe width="600" height="300" src={linkCancion} 
+                    frameBorder="10" ></iframe>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 export default Search
