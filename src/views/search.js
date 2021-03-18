@@ -26,13 +26,18 @@ import StarBorder from '@material-ui/icons/StarBorder';
 import "../styles/search.css";
 import { green } from '@material-ui/core/colors';
 import PlayCircleFilledWhiteTwoToneIcon from '@material-ui/icons/PlayCircleFilledWhiteTwoTone';
-import { SettingsPowerRounded } from '@material-ui/icons';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { SettingsBackupRestoreSharp, SettingsPowerRounded } from '@material-ui/icons';
 
 
 const Search = () => {
+    const history = useHistory()
     const [search, setSearch] = useState({artist:'Reik', song:'Si me dices que si', link:'https://www.youtube.com/embed/ieodxKMYRf8'})
     const [songUser, setSongUser] = useState('piano')
     const [generos, setGeneros] = useState([{ name: 'pop', songs:[{ name:'si me dices que si', link:'https://www.youtube.com/embed/ieodxKMYRf8'}]} ])
+    const [song, setSong] = useState('')
+    const [atras, setAtras] = useState(false)
+    const [currentSong, setCurrentSong] = useState('')
     const token = useContext(UserContext)
     const linkSearch = 'genres/'
     let count = 0
@@ -42,17 +47,13 @@ const Search = () => {
         method: 'GET',
         token: token
     })
+    
     const songData = data.fetchedData
     console.log(songData)
-    
-    if (count == 0) {
-        console.log('entro')
-        console.log(generos)
-        //setGeneros(songData)
-        count+=1
-    }
-    const genero1 = songData[0]
-    console.log(genero1)
+
+    useEffect(() => {
+        if (atras) history.push('/')
+    }, [atras])
     
     //console.log(genero1.name)
     /*const songDataJson = songData.json()
@@ -78,21 +79,43 @@ const Search = () => {
     }
 
     const searchfunction = () => {
-        setSearch({artisti: '', song: info[0].name , link: info[0].link })
+        setSearch({artist: '', song: info[0].name , link: info[0].link })
         //console.log(info[0].user)
+        console.log(linksearch)
         console.log(info[0].name)
         console.log(info[0].link)
     }
 
     const linksearch = 'songs/?search='+songUser
-        const info = useApi({
-            link:linksearch,
-            method: 'GET' ,
-            token:token
-        }).fetchedData
+    const info = useApi({
+        link:linksearch,
+        method: 'GET' ,
+        token:token
+    }).fetchedData
 
     const changeInput = (e) => {
         setSongUser(e.target.value)
+    }
+
+   /* const validacion = useApi({
+        link:'songs/validation/',
+        method: 'POST',
+        body: {
+            song: currentSong,
+            token:token.token            
+        },
+        call:currentSong
+    })*/
+    const changeSong = (song) => {
+        setCurrentSong(song.id)
+        setSearch({artist: '', song: song.name , link: song.link })
+        /*
+        if(validacion.fetchedData.error){
+            alert('Has superado el limite de canciones, ¡vuelvete premium para escuchar musica sin limites!')
+
+        }else{
+            setSearch({artist: '', song: song.name , link: song.link })
+        }*/
     }
 
     if(data.isLoading )
@@ -107,6 +130,12 @@ const Search = () => {
         return (
             <div className='background'>
                 <div className='lefSideMenu'>
+                    <button className='backButton' onClick={() => {
+                        console.log('atras')
+                        setAtras(true)
+                    } }>
+                    <ArrowBackIcon style={{ color: green[500], fontSize: 30}}/>
+                    </button>
                     <input className='searchBar' placeholder="Search song" onChange={changeInput}></input>
                     <button className='searchSongButton' onClick={searchfunction}>Search</button>
                     <List 
@@ -131,11 +160,15 @@ const Search = () => {
                                     <List component="div" disablePadding>
                                         {
                                             genero.songs.map( (song) => {
-                                                
+                                                //console.log(song)
                                                 return (
-                                                    <ListItem button className='SongLabel' >
+                                                    <ListItem className='SongLabel' >
                                                         <ListItemText primary={song.name} />{/*cancion que jala de la base*/}
-                                                        <ListItemIcon>
+                                                        <ListItemIcon onClick={() => {
+                                                            console.log('click')
+                                                            console.log(song)
+                                                            changeSong(song)
+                                                        }}>
                                                             <PlayCircleFilledWhiteTwoToneIcon style={{ color: green[500], fontSize: 30}}/>
                                                         </ListItemIcon>
                                                     </ListItem>
