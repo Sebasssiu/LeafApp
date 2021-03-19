@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+}
+.h3 {
+  color: rgb(6, 182, 6);
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgb(3, 5, 12);
+  min-height: 100vh;
+}
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+input {
+  height: 10px;
+  width: 300px;
+  border-radius: 20px;
+  outline: none;
+  padding: 20px;
+  font-size: 20px;
+  margin: 20px;
+}
