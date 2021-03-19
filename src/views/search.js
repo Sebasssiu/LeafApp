@@ -49,19 +49,12 @@ const Search = () => {
     })
     
     const songData = data.fetchedData
-    console.log(songData)
 
     useEffect(() => {
         if (atras) history.push('/')
     }, [atras])
-    
-    //console.log(genero1.name)
-    /*const songDataJson = songData.json()
-    setSearch({ artist: songDataJson.artist, song: songDataJson.song, link: songDataJson.songLink})
-    */
 
     let linkCancion = search.link + "?autoplay=1&mute=0"
-    console.log(linkCancion)
     const [open, setOpen] = React.useState(true);
 
     const styleHeaderList = {
@@ -79,11 +72,9 @@ const Search = () => {
     }
 
     const searchfunction = () => {
-        setSearch({artist: '', song: info[0].name , link: info[0].link })
-        //console.log(info[0].user)
-        console.log(linksearch)
-        console.log(info[0].name)
-        console.log(info[0].link)
+        //setSearch({artist: '', song: info[0].name , link: info[0].link })
+        console.log(info)
+        setCurrentSong(info[0])
     }
 
     const linksearch = 'songs/?search='+songUser
@@ -97,25 +88,28 @@ const Search = () => {
         setSongUser(e.target.value)
     }
 
-   /* const validacion = useApi({
+    const validacion = useApi({
         link:'songs/validation/',
         method: 'POST',
         body: {
-            song: currentSong,
+            song: currentSong.id,
             token:token.token            
         },
         call:currentSong
-    })*/
+    })
+    console.log(validacion.fetchedData)
+    useEffect( () => {
+        if(validacion.fetchedData.length !== 0)
+        {
+            if(validacion.fetchedData.error){
+                alert('Has superado el limite de canciones, ¡Vuelvete premium para escuchar musica sin limites!')
+            }else{
+                setSearch({artist: '', song: currentSong.name , link: currentSong.link })
+            }
+        }
+    }, [currentSong])
     const changeSong = (song) => {
-        setCurrentSong(song.id)
-        setSearch({artist: '', song: song.name , link: song.link })
-        /*
-        if(validacion.fetchedData.error){
-            alert('Has superado el limite de canciones, ¡vuelvete premium para escuchar musica sin limites!')
-
-        }else{
-            setSearch({artist: '', song: song.name , link: song.link })
-        }*/
+        setCurrentSong(song)
     }
 
     if(data.isLoading )
@@ -131,7 +125,6 @@ const Search = () => {
             <div className='background'>
                 <div className='lefSideMenu'>
                     <button className='backButton' onClick={() => {
-                        console.log('atras')
                         setAtras(true)
                     } }>
                     <ArrowBackIcon style={{ color: green[500], fontSize: 30}}/>
@@ -149,7 +142,6 @@ const Search = () => {
                         className='listaGeneros'
                     >
                         {data.fetchedData.map( (genero) => {
-                            console.log(genero.name)
                             return (
                                 <>
                                 <ListItem button onClick={handleClick} id={genero.id}>
@@ -160,13 +152,10 @@ const Search = () => {
                                     <List component="div" disablePadding>
                                         {
                                             genero.songs.map( (song) => {
-                                                //console.log(song)
                                                 return (
                                                     <ListItem className='SongLabel' >
                                                         <ListItemText primary={song.name} />{/*cancion que jala de la base*/}
                                                         <ListItemIcon onClick={() => {
-                                                            console.log('click')
-                                                            console.log(song)
                                                             changeSong(song)
                                                         }}>
                                                             <PlayCircleFilledWhiteTwoToneIcon style={{ color: green[500], fontSize: 30}}/>
