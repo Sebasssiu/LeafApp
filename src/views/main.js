@@ -4,6 +4,7 @@ import SubscriptionCard from '../components/subscriptionCard'
 import NavBar from '../components/NavBar'
 import { UserContext } from '../App'
 import { useHistory } from 'react-router-dom'
+import '../styles/globalStyles.css'
 
 const data = [
   "Listen music",
@@ -17,7 +18,7 @@ const Main = () =>{
   return(
     <>
       <NavBar token={token}/>
-      <div className={styles.menu}>
+      <section id="home" className={styles.menu}>
         <h1 className={styles.title}>La música es el vino que llena la copa del silencio</h1>
         {!token.token ? (
           <button className={styles.signup} onClick={() => history.push('/signup')}>
@@ -29,8 +30,8 @@ const Main = () =>{
           </button>
         )
         }
-      </div>
-      <div className={styles.container}>
+      </section>
+      <section id="premium" className={styles.container}>
         <SubscriptionCard 
           name={"Free"}
           topBackground={"rgb(185, 182, 0)"} 
@@ -45,7 +46,7 @@ const Main = () =>{
           subsInfo={data}
           price={"10.99"}
         />
-      </div>
+      </section>
     </>
   )
 }

@@ -6,9 +6,11 @@ import Profile from './views/profile'
 import SignUp from './views/signup'
 import Search from './views/search'
 import Premium from './views/premium'
+import ModifySongs from './views/modifySongs'
+import Song from './components/songCard'
+import ModifySongDetails from './views/modifySongDetails'
 
 export const UserContext = createContext()
-
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('token'))
   return (
@@ -32,6 +34,15 @@ const App = () => {
           </Route>
           <Route exact path='/premium'>
             <Premium/>
+          </Route>
+          <Route exact path='/createPlaylist'>
+            {/*AQUI VA TU COMPONENTE SARAVIA*/}
+          </Route>
+          <Route exact path='/modifySongs'>
+            <ModifySongs />
+          </Route>
+          <Route exact path='/modifySongs/modify'>
+            <ModifySongDetails />
           </Route>
         </Switch>
       </Router>

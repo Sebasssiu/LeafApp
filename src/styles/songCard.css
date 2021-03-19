@@ -1,0 +1,28 @@
+.card {
+  min-height: 50px;
+  width: 400px;
+  border: solid rgb(6, 182, 6) 5px;
+  border-radius: 10px;
+  color: rgb(6, 182, 6) 5px;
+  background-color: rgb(3, 5, 12);
+  margin: 20px;
+  padding: 20px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgb(3, 5, 12);
+  min-height: 100vh;
+}
+.loading {
+  width: 100px;
+  height: 100px;
+  background-image: url("https://www.ecostudioxv.com/assets/images/loader.gif");
+  background-size: cover;
+}
+.h1 {
+  color: rgb(6, 182, 6);
+  margin: 10px;
+}

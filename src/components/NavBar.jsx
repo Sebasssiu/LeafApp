@@ -8,7 +8,7 @@ const NavBar = ({ token }) => {
       <nav>
         <ul className="links">
           <li>
-            <a href="/">Home</a>
+            <a href="#home">Home</a>
           </li>
           <li>
             <a href="/">About Us</a>
@@ -36,7 +36,7 @@ const NavBar = ({ token }) => {
           }
         </ul>
       </nav>
-      <a href="/#" className="prembutton">
+      <a href="#premium" className="prembutton">
         <button>PREMIUM</button>
       </a>
     </header>

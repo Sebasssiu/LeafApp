@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext} from 'react'
 import styles from '../styles/styles.module.css'
 import CheckIcon from '@material-ui/icons/Check';
 import CloseIcon from '@material-ui/icons/Close';
 import Button from "@material-ui/core/Button";
 import { useHistory } from 'react-router-dom'
+import { UserContext } from '../App'
 
 const SubscriptionCard = (props) =>{
+    const token = useContext(UserContext)
     const history = useHistory()
     const innerStyles = {                                                                                               
         container:{
@@ -26,6 +28,13 @@ const SubscriptionCard = (props) =>{
             background: props.topBackground,
             width: '100px',
             borderRadius: '10px'
+        }
+    }
+    const buyClick = () => {
+        if (token.token) {
+            history.push({pathname: '/premium', state: props})
+        } else {
+            alert('You need to login first!')
         }
     }
     return(
@@ -50,7 +59,7 @@ const SubscriptionCard = (props) =>{
             })}
             <h1 className={styles.price} style={innerStyles.price}>${props.price}</h1>
             <div className={styles.button}>
-                <Button style={innerStyles.button} variant="contained" onClick={() => history.push({pathname: '/premium', state: props})}>
+                <Button style={innerStyles.button} variant="contained" onClick={buyClick}>
                     Buy
                 </Button>
             </div>
