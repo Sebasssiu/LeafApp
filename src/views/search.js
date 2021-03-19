@@ -73,7 +73,7 @@ const Search = () => {
 
     const searchfunction = () => {
         //setSearch({artist: '', song: info[0].name , link: info[0].link })
-        console.log(info)
+        //console.log(info)
         setCurrentSong(info[0])
     }
 
@@ -97,8 +97,9 @@ const Search = () => {
         },
         call:currentSong
     })
-    console.log(validacion.fetchedData)
+    
     useEffect( () => {
+        console.log(validacion.fetchedData)
         if(validacion.fetchedData.length !== 0)
         {
             if(validacion.fetchedData.error){
