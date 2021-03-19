@@ -100,15 +100,18 @@ const Search = () => {
     
     useEffect( () => {
         console.log(validacion.fetchedData)
-        if(validacion.fetchedData.length !== 0)
+        if(validacion.fetchedData)
         {
             if(validacion.fetchedData.error){
                 alert('Has superado el limite de canciones, ¡Vuelvete premium para escuchar musica sin limites!')
-            }else{
+            }else if(validacion.fetchedData.alert){
                 setSearch({artist: '', song: currentSong.name , link: currentSong.link })
             }
+            else{
+                setSearch({artist: 'Reik', song: 'Si me dices que si' , link: 'https://www.youtube.com/embed/ieodxKMYRf8' })
+            }
         }
-    }, [currentSong])
+    }, [validacion])
     const changeSong = (song) => {
         setCurrentSong(song)
     }
