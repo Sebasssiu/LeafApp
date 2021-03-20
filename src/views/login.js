@@ -21,12 +21,15 @@ const Login = () => {
         },
         call: isLogin
     })
+    const tokenGetter = () => {
+      if (data.fetchedData.token) {
+        token.setToken(data.fetchedData.token)
+        localStorage.setItem('token', data.fetchedData.token)
+        history.push('/')
+      }
+    }
     useEffect(() => {
-        if (data.fetchedData.token) {
-            token.setToken(data.fetchedData.token)
-            localStorage.setItem('token', data.fetchedData.token)
-            history.push('/')
-        }
+      tokenGetter()
     }, [data.fetchedData])
 
     return (

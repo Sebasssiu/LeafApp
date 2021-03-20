@@ -20,9 +20,9 @@ const ModifySongs = () => {
             <div className="container">
                 {data.fetchedData.map(album => {
                     return (
-                        <>
-                            <SongCard album={album} />
-                        </>
+                        <div id={album.id}>
+                          <SongCard album={album} />
+                        </div>
                     )
                 })}
             </div>

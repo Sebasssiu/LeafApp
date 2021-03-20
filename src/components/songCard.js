@@ -10,7 +10,7 @@ const SongCard = ({ album }) => {
             <ul>
                 {album.almbum_songs.map(song => {
                     return(
-                        <li className="h1" onClick={() => history.push({pathname: '/modifySongs/modify', state: {album, song}})}>
+                        <li id={song.id} className="h1" onClick={() => history.push({pathname: '/modifySongs/modify', state: {album, song}})}>
                             {`${song.name}      >`}
                         </li>    
                     )            
