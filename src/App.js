@@ -10,6 +10,7 @@ import ModifySongs from "./views/modifySongs";
 import Song from "./components/songCard";
 import ModifySongDetails from "./views/modifySongDetails";
 import PlaylistForm from "./components/PlaylistForm";
+import AlbumForm from "./components/AlbumForm";
 
 export const UserContext = createContext();
 const App = () => {
@@ -38,6 +39,9 @@ const App = () => {
           </Route>
           <Route exact path="/playlists">
             <PlaylistForm />
+          </Route>
+          <Route exact path="/albums">
+            <AlbumForm />
           </Route>
           <Route exact path="/modifySongs">
             <ModifySongs />

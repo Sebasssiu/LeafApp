@@ -4,17 +4,17 @@ import { UserContext } from "../App";
 import useApi from "../customHooks/useApi";
 import "../styles/inputPages.css";
 
-const PlaylistForm = () => {
+const AlbumForm = () => {
   //const [plnames, setplnames] = useState([]);
   //const [songinfo, setsonginfo] = useState([]);
 
-  const [currentsongs, setcurrentsongs] = useState([]);
-  const [pname, setpname] = useState("");
+  const [currentalbums, setcurrentalbums] = useState([]);
+  const [aname, setpname] = useState("");
   const token = useContext(UserContext);
   let ownerid = token.token;
 
   const plnames = useApi({
-    link: "playlists/userPlaylist/",
+    link: "albums/useralbum/",
     method: "POST",
     body: {
       token: ownerid,
@@ -22,7 +22,7 @@ const PlaylistForm = () => {
   });
 
   const nameinput = () => {
-    let playname = prompt("Whats the name of the playlist?");
+    let playname = prompt("Whats the name of the album?");
     fetch("https://leaf-musicapp.herokuapp.com/playlists/createplaylist/", {
       method: "POST",
       headers: {
@@ -43,7 +43,7 @@ const PlaylistForm = () => {
     position: "fixed",
     height: "100%",
     width: "350px",
-    background: "#76ab4b",
+    background: "crimson",
     padding: "30px 0",
   };
   const sidetitle = {
@@ -82,7 +82,7 @@ const PlaylistForm = () => {
     <div className="wrapper" style={wrap}>
       <div className="sidebar" style={sideb}>
         <h2 className="ptitle" style={sidetitle}>
-          PLAYLISTS
+          ALBUMS
         </h2>
         <ul>
           {plnames.fetchedData.map((detail, index) => {
@@ -91,7 +91,7 @@ const PlaylistForm = () => {
                 key={index.toString()}
                 style={listitem}
                 onClick={() => {
-                  setcurrentsongs(detail.songs);
+                  setcurrentalbums(detail.almbum_songs);
                   //setpname(plnames[index].name);
                 }}
               >
@@ -106,9 +106,9 @@ const PlaylistForm = () => {
       </div>
       <div className="maincontent" style={content}>
         <h1 className="playlisttitle" style={sidetitle}>
-          {pname}
+          {aname}
         </h1>
-        {currentsongs.map((detail, index) => {
+        {currentalbums.map((detail, index) => {
           return <SongElement key={index.toString()} titulo={detail.name} />;
         })}
       </div>
@@ -116,4 +116,4 @@ const PlaylistForm = () => {
   );
 };
 
-export default PlaylistForm;
+export default AlbumForm;
