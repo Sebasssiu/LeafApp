@@ -77,7 +77,7 @@ const Profile = () => {
           <button onClick={ () => history.push('/albums')}>Create album</button>
         ) : null}
         {data.fetchedData.isAdmin ? (
-          <button onClick={ () => history.push('/modifySongs')}>Modify songs</button>
+          <button onClick={ () => history.push('/modifySongs')}>Modify Data</button>
         ) : null}
       </div>
     )
