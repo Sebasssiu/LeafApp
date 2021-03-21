@@ -21,13 +21,6 @@ const PlaylistForm = () => {
     },
   });
 
-  console.log(plnames);
-
-  const songinfo = useApi({
-    link: "songs/",
-    method: "GET",
-  });
-
   /*
   useEffect(() => {
     fetch("https://leaf-musicapp.herokuapp.com/playlists/", {
@@ -78,7 +71,7 @@ const PlaylistForm = () => {
     marginLeft: "330px",
     padding: "100px 0",
   };
-  if (plnames.isLoading || songinfo.isLoading) {
+  if (plnames.isLoading) {
     return (
       <div className="container">
         <div className="loading" />
@@ -98,11 +91,11 @@ const PlaylistForm = () => {
                 key={index.toString()}
                 style={listitem}
                 onClick={() => {
-                  setcurrentsongs(detail.fields.name);
-                  //setpname(plnames[index].fields.name);
+                  setcurrentsongs(detail.songs);
+                  //setpname(plnames[index].name);
                 }}
               >
-                {detail.fields.name}
+                {detail.name}
               </li>
             );
           })}
@@ -112,14 +105,11 @@ const PlaylistForm = () => {
         <h1 className="playlisttitle" style={sidetitle}>
           {pname}
         </h1>
-        {plnames.fetchedData.map((detail, index) => {
+        {currentsongs.map((detail, index) => {
           console.log(detail);
-          return (
-            <SongElement
-              key={index.toString()}
-              //titulo={detail.fields.songs.name}
-            />
-          );
+
+          //console.log(detail.songs[index].name);
+          return <SongElement key={index.toString()} titulo={detail.name} />;
         })}
       </div>
     </div>
