@@ -13,6 +13,20 @@ const PlaylistForm = () => {
   const token = useContext(UserContext);
   let ownerid = token.token;
 
+  const nameinput = () => {
+    let playname = prompt("Whats the name of the playlist?");
+    fetch("https://leaf-musicapp.herokuapp.com/playlists/createplaylist/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: ownerid,
+        name: playname,
+      }),
+    });
+  };
+
   const plnames = useApi({
     link: "playlists/userPlaylist/",
     method: "POST",
@@ -86,7 +100,7 @@ const PlaylistForm = () => {
             );
           })}
         </ul>
-        <button className="createplaylist" style={butt}>
+        <button className="createplaylist" style={butt} onClick={nameinput}>
           +
         </button>
       </div>
