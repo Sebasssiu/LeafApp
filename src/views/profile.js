@@ -70,8 +70,11 @@ const Profile = () => {
         {data.fetchedData.isArtist !== isArtist ? (
           <button onClick={ () => setLink('user/becomeArtist/')}>Save changes</button>
         ) : null}
-        {data.fetchedData.isArtist || nowArtist ? (
+        {data.fetchedData.isPremium ? (
           <button onClick={ () => history.push('/createPlaylist')}>Create playlist</button>
+        ) : null}
+        {data.fetchedData.isArtist || nowArtist ? (
+          <button onClick={ () => history.push('/modifyArtist')}>Create playlist</button>
         ) : null}
         {data.fetchedData.isAdmin ? (
           <button onClick={ () => history.push('/modifySongs')}>Modify songs</button>

@@ -7,8 +7,8 @@ import SignUp from './views/signup'
 import Search from './views/search'
 import Premium from './views/premium'
 import ModifySongs from './views/modifySongs'
-import Song from './components/songCard'
 import ModifySongDetails from './views/modifySongDetails'
+import Item from './views/item'
 
 export const UserContext = createContext()
 const App = () => {
@@ -38,11 +38,17 @@ const App = () => {
           <Route exact path='/createPlaylist'>
             {/*AQUI VA TU COMPONENTE SARAVIA*/}
           </Route>
+          <Route exact path='/modifyArtist'>
+            {/*AQUI VA EL COMPONENTE MODIFICAR ARTISTA*/}
+          </Route>
           <Route exact path='/modifySongs'>
             <ModifySongs />
           </Route>
           <Route exact path='/modifySongs/modify'>
             <ModifySongDetails />
+          </Route>
+          <Route exact path='/modifySongs/modify/item'>
+            <Item />
           </Route>
         </Switch>
       </Router>

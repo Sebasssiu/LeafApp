@@ -1,32 +1,41 @@
 import React from 'react'
-import useApi from '../customHooks/useApi'
-import SongCard from '../components/songCard'
 import '../styles/songCard.css'
+import '../styles/inputPages.css'
+import { useHistory } from 'react-router-dom'
 
 const ModifySongs = () => {
-    const data = useApi({
-        link: 'albums/',
-        method: 'GET'
-    })
-    
-    if (data.isLoading) {
-        return (
-            <div className="container">
-                <div className="loading"/>
-            </div>
-        )
-    } else {
-        return (
-            <div className="container">
-                {data.fetchedData.map(album => {
-                    return (
-                        <div id={album.id}>
-                          <SongCard album={album} />
-                        </div>
-                    )
-                })}
-            </div>
-        )
-    }
+  const history = useHistory()
+  return (
+    <div className="container">
+      <img src="/bitfinex-leaf.svg" alt="logo" className="logo" />
+      <button onClick={() => history.push({
+        pathname: '/modifySongs/modify',
+         state: {
+           option: 'user/artists/'
+         },  
+        })}
+      >
+        Modify Artists
+      </button>
+      <button onClick={() => history.push({
+        pathname: '/modifySongs/modify',
+         state: {
+           option: 'albums/'
+         },  
+        })}
+      >
+        Modify Albums
+      </button>
+      <button onClick={() => history.push({
+        pathname: '/modifySongs/modify',
+         state: {
+           option: 'songs/'
+         },  
+        })}
+      >
+        Modify Songs
+      </button>
+    </div>
+  )
 }
 export default ModifySongs
