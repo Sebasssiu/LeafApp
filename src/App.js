@@ -1,20 +1,21 @@
-import React, { useState, createContext } from 'react'
-import Main from './views/main'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Login from './views/login'
-import Profile from './views/profile'
-import SignUp from './views/signup'
-import Search from './views/search'
-import Premium from './views/premium'
-import ModifySongs from './views/modifySongs'
-import Song from './components/songCard'
-import ModifySongDetails from './views/modifySongDetails'
+import React, { useState, createContext } from "react";
+import Main from "./views/main";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Login from "./views/login";
+import Profile from "./views/profile";
+import SignUp from "./views/signup";
+import Search from "./views/search";
+import Premium from "./views/premium";
+import ModifySongs from "./views/modifySongs";
+import Song from "./components/songCard";
+import ModifySongDetails from "./views/modifySongDetails";
+import PlaylistForm from "./components/PlaylistForm";
 
-export const UserContext = createContext()
+export const UserContext = createContext();
 const App = () => {
-  const [token, setToken] = useState(localStorage.getItem('token'))
+  const [token, setToken] = useState(localStorage.getItem("token"));
   return (
-    <UserContext.Provider value={{token: token, setToken: setToken}}>
+    <UserContext.Provider value={{ token: token, setToken: setToken }}>
       <Router>
         <Switch>
           <Route exact path="/">
@@ -29,24 +30,24 @@ const App = () => {
           <Route exact path="/signup">
             <SignUp />
           </Route>
-          <Route exact path='/search'>
-            <Search/>
+          <Route exact path="/search">
+            <Search />
           </Route>
-          <Route exact path='/premium'>
-            <Premium/>
+          <Route exact path="/premium">
+            <Premium />
           </Route>
-          <Route exact path='/createPlaylist'>
-            {/*AQUI VA TU COMPONENTE SARAVIA*/}
+          <Route exact path="/playlists">
+            <PlaylistForm />
           </Route>
-          <Route exact path='/modifySongs'>
+          <Route exact path="/modifySongs">
             <ModifySongs />
           </Route>
-          <Route exact path='/modifySongs/modify'>
+          <Route exact path="/modifySongs/modify">
             <ModifySongDetails />
           </Route>
         </Switch>
       </Router>
     </UserContext.Provider>
-  )
-}
-export default App
+  );
+};
+export default App;
