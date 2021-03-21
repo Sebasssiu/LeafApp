@@ -21,26 +21,6 @@ const PlaylistForm = () => {
     },
   });
 
-  /*
-  useEffect(() => {
-    fetch("https://leaf-musicapp.herokuapp.com/playlists/", {
-      method: method,
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: body ? JSON.stringify(body) : null,
-    })
-      .then((r) => r.json())
-      .then((r) => setplnames(r));
-  }, []);
-
-  useEffect(() => {
-    fetch("https://leaf-musicapp.herokuapp.com/songs/")
-      .then((r) => r.json())
-      .then((r) => setsonginfo(r));
-  }, []);
-  */
   const wrap = {
     display: "flex",
     position: "relative",
@@ -71,6 +51,12 @@ const PlaylistForm = () => {
     marginLeft: "330px",
     padding: "100px 0",
   };
+  const butt = {
+    position: "absolute",
+    marginBottom: "70px",
+    right: "0",
+    bottom: "0",
+  };
   if (plnames.isLoading) {
     return (
       <div className="container">
@@ -100,15 +86,15 @@ const PlaylistForm = () => {
             );
           })}
         </ul>
+        <button className="createplaylist" style={butt}>
+          +
+        </button>
       </div>
       <div className="maincontent" style={content}>
         <h1 className="playlisttitle" style={sidetitle}>
           {pname}
         </h1>
         {currentsongs.map((detail, index) => {
-          console.log(detail);
-
-          //console.log(detail.songs[index].name);
           return <SongElement key={index.toString()} titulo={detail.name} />;
         })}
       </div>
