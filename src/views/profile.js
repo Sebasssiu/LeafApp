@@ -71,10 +71,10 @@ const Profile = () => {
           <button onClick={ () => setLink('user/becomeArtist/')}>Save changes</button>
         ) : null}
         {data.fetchedData.isPremium ? (
-          <button onClick={ () => history.push('/createPlaylist')}>Create playlist</button>
+          <button onClick={ () => history.push('/playlists')}>Create playlist</button>
         ) : null}
         {data.fetchedData.isArtist || nowArtist ? (
-          <button onClick={ () => history.push('/modifyArtist')}>Create playlist</button>
+          <button onClick={ () => history.push('/albums')}>Create album</button>
         ) : null}
         {data.fetchedData.isAdmin ? (
           <button onClick={ () => history.push('/modifySongs')}>Modify songs</button>
