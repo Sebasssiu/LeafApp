@@ -6,7 +6,7 @@ import "../styles/inputPages.css";
 
 const AlbumForm = () => {
   const [currentalbums, setcurrentalbums] = useState([]);
-  const [currentindex, setcurrentindex] = useState(0);
+  const [albumselected, setalbumselected] = useState([false]);
   const [currentalbumid, setcurrentalbumid] = useState(9);
   const [currentname, setcurrentname] = useState("");
   const [currentgenre, setcurrentgenre] = useState("");
@@ -128,7 +128,6 @@ const AlbumForm = () => {
                 style={listitem}
                 onClick={() => {
                   setcurrentalbums(detail.almbum_songs);
-                  setcurrentindex(index);
                   setcurrentalbumid(detail.id);
                 }}
               >

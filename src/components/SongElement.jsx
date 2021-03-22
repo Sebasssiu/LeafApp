@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 const SongElement = ({ titulo, artista }) => {
+  const history = useHistory();
+  const [play, setplay] = useState(false);
+
+  useEffect(() => {
+    if (play) {
+      localStorage.setItem("name", { titulo });
+      history.push("/search");
+    }
+  }, [play]);
+
   const style = {
     display: "flex",
     background: "#76ab4b",
@@ -31,7 +42,13 @@ const SongElement = ({ titulo, artista }) => {
       <h1 className="artistname" style={namestyle}>
         {artista}
       </h1>
-      <button className="play" style={buttstyle}>
+      <button
+        className="play"
+        style={buttstyle}
+        onClick={() => {
+          setplay(true);
+        }}
+      >
         Play
       </button>
     </div>

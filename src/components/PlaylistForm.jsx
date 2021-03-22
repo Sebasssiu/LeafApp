@@ -61,6 +61,9 @@ const PlaylistForm = () => {
     //borderBottom: "5px solid rgba(0, 0, 0, 0, 1)",
   };
   const content = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     width: "100%",
     marginLeft: "330px",
     padding: "100px 0",
