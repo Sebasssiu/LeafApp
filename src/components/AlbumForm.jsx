@@ -51,7 +51,7 @@ const AlbumForm = () => {
 
   const nameinput = () => {
     let playname = prompt("Whats the name of the album?");
-    fetch("https://leaf-musicapp.herokuapp.com/playlists/createplaylist/", {
+    fetch("https://leaf-musicapp.herokuapp.com/albums/createalbum/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
