@@ -112,7 +112,7 @@ const PlaylistForm = () => {
           {pname}
         </h1>
         {currentsongs.map((detail, index) => {
-          return <SongElement key={index.toString()} titulo={detail.name} />;
+          return <SongElement key={index.toString()} titulo={detail.name} link={detail.link} />;
         })}
       </div>
     </div>

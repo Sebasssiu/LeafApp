@@ -21,7 +21,7 @@ const Search = () => {
     const [search, setSearch] = useState({artist:'Reik', song:'Si me dices que si', link:'https://www.youtube.com/embed/ieodxKMYRf8'})
     const [songUser, setSongUser] = useState('piano')
     const [atras, setAtras] = useState(false)
-    const [currentSong, setCurrentSong] = useState('')
+    const [currentSong, setCurrentSong] = useState({artist:'Reik', song:'Si me dices que si', link:'https://www.youtube.com/embed/ieodxKMYRf8'})
     const token = useContext(UserContext)
     const linkSearch = 'genres/'
 
@@ -30,6 +30,13 @@ const Search = () => {
         method: 'GET',
         token: token
     })
+
+    const songPlayList = localStorage.getItem('name')
+    if ( songPlayList ) {
+        const linkPlayList = localStorage.getItem('link')
+        search.song = songPlayList
+        search.link = linkPlayList
+    }
     
     useEffect(() => {
         if (atras) history.push('/')
@@ -78,7 +85,7 @@ const Search = () => {
     })
     
     useEffect( () => {
-        console.log(validacion.fetchedData)
+        //console.log(validacion.fetchedData)
         if(validacion.fetchedData)
         {
             if(validacion.fetchedData.error){
