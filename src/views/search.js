@@ -14,6 +14,7 @@ import "../styles/search.css";
 import { green } from '@material-ui/core/colors';
 import PlayCircleFilledWhiteTwoToneIcon from '@material-ui/icons/PlayCircleFilledWhiteTwoTone';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import AddIcon from '@material-ui/icons/Add';
 
 
 const Search = () => {
@@ -60,6 +61,8 @@ const Search = () => {
     }
 
     const searchfunction = () => {
+        localStorage.removeItem('name')
+        localStorage.removeItem('link')
         setCurrentSong(info[0])
     }
 
@@ -99,6 +102,8 @@ const Search = () => {
         }
     }, [validacion])
     const changeSong = (song) => {
+        localStorage.removeItem('name')
+        localStorage.removeItem('link')
         setCurrentSong(song)
     }
 
@@ -173,6 +178,16 @@ const Search = () => {
                       src={linkCancion}
                       frameBorder="10" 
                     />
+                    <div className='playlistsection'>
+						<select
+						className="playListSelection"
+						>
+						<option></option>
+						</select>
+						<button className='buttonAddPlayList' onClick={() => console.log(currentSong) } >
+							<AddIcon style={{ color: green[500], fontSize: 30}} />
+						</button>
+					</div>
                 </div>
             </div>
         )

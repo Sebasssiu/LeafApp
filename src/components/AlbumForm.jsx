@@ -142,7 +142,7 @@ const AlbumForm = () => {
       </div>
       <div className="maincontent" style={content}>
         {currentalbums.map((detail, index) => {
-          return <SongElement key={index.toString()} titulo={detail.name} />;
+          return <SongElement key={index.toString()} titulo={detail.name} link={detail.link} />;
         })}
         <h1 className="createsong">AGREGAR CANCION</h1>
         <input
