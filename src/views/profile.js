@@ -5,11 +5,16 @@ import useApi from '../customHooks/useApi'
 import PersonIcon from '@material-ui/icons/Person';
 import { green } from '@material-ui/core/colors';
 import { useHistory } from 'react-router-dom'
+import FaceIcon from '@material-ui/icons/Face';
 
 const Profile = () => {
   const history = useHistory()
-  const [link, setLink] = useState()
   const token = useContext(UserContext)
+  const [link, setLink] = useState()
+  const [senData, setSenData] = useState({
+    token: token.token,
+    artist_name: '',
+  })
   const data = useApi({
     link: 'user/userData/',
     method: 'POST',
@@ -20,16 +25,15 @@ const Profile = () => {
   const [isArtist, setIsArtist] = useState(data.fetchedData.isArtist)
   const [nowArtist, setNowArtist] = useState(false)
   const becomeArtist = useApi({
-    link: link,
+    link,
     method: 'POST',
-    body: {
-      token: token.token
-    }
+    body: senData,
   })
   useEffect(() => {
     if (becomeArtist.fetchedData.response) { 
       alert('Ahora eres un artista!')
       setNowArtist(true)
+      history.push('/')
     }
     if (data.fetchedData.length !== 0) setIsArtist(data.fetchedData.isArtist)
   }, [becomeArtist, data])
@@ -51,6 +55,20 @@ const Profile = () => {
             readonly
           />
         </div>
+        {isArtist && !data.fetchedData.isArtist ? (
+          <div>
+            <FaceIcon style={{ color: green[500], fontSize: 30}}/>
+            <input 
+              type="text"
+              value = {senData.artist_name}
+              placeholder="Artist Name"
+              onChange = {(e) => setSenData({
+                ...senData,
+                artist_name: e.target.value,
+              })}
+            />
+          </div>
+        ) : null}
         <div className="check">
           <h3 className="h3">Is Premium</h3>
           <input 
@@ -63,7 +81,7 @@ const Profile = () => {
           <h3 className="h3">Is Artist</h3>
           <input 
             type="checkbox"
-            checked = {isArtist ? isArtist : false}
+            checked = {isArtist}
             onChange = {() => setIsArtist(isArtist ? false : true)}
           />
         </div>
