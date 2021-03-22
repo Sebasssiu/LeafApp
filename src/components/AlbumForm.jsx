@@ -5,11 +5,13 @@ import useApi from "../customHooks/useApi";
 import "../styles/inputPages.css";
 
 const AlbumForm = () => {
-  //const [plnames, setplnames] = useState([]);
-  //const [songinfo, setsonginfo] = useState([]);
-
   const [currentalbums, setcurrentalbums] = useState([]);
-  const [aname, setpname] = useState("");
+  const [currentindex, setcurrentindex] = useState(0);
+  const [currentalbumid, setcurrentalbumid] = useState(9);
+  const [currentname, setcurrentname] = useState("");
+  const [currentgenre, setcurrentgenre] = useState("");
+  const [currentlink, setcurrentlink] = useState("");
+  const [currentdate, setcurrentdate] = useState("");
   const token = useContext(UserContext);
   let ownerid = token.token;
 
@@ -20,6 +22,32 @@ const AlbumForm = () => {
       token: ownerid,
     },
   });
+
+  const availablegenres = useApi({
+    link: "genres/",
+    method: "GET",
+  });
+
+  const sendData = (sname, gen, slink, sdate) => {
+    if (sname && gen && slink && sdate != "") {
+      fetch("https://leaf-musicapp.herokuapp.com/songs/createsong/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token: ownerid,
+          name: sname,
+          genre: gen,
+          link: slink,
+          date: sdate,
+          album: currentalbumid,
+        }),
+      });
+    } else {
+      alert("Ingresa todos los campos");
+    }
+  };
 
   const nameinput = () => {
     let playname = prompt("Whats the name of the album?");
@@ -61,6 +89,9 @@ const AlbumForm = () => {
     //borderBottom: "5px solid rgba(0, 0, 0, 0, 1)",
   };
   const content = {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
     width: "100%",
     marginLeft: "330px",
     padding: "100px 0",
@@ -71,7 +102,12 @@ const AlbumForm = () => {
     right: "0",
     bottom: "0",
   };
-  if (plnames.isLoading) {
+  const genreselect = {
+    width: "340px",
+    height: "50px",
+  };
+
+  if (plnames.isLoading || availablegenres.isLoading) {
     return (
       <div className="container">
         <div className="loading" />
@@ -92,7 +128,8 @@ const AlbumForm = () => {
                 style={listitem}
                 onClick={() => {
                   setcurrentalbums(detail.almbum_songs);
-                  //setpname(plnames[index].name);
+                  setcurrentindex(index);
+                  setcurrentalbumid(detail.id);
                 }}
               >
                 {detail.name}
@@ -105,12 +142,45 @@ const AlbumForm = () => {
         </button>
       </div>
       <div className="maincontent" style={content}>
-        <h1 className="playlisttitle" style={sidetitle}>
-          {aname}
-        </h1>
         {currentalbums.map((detail, index) => {
           return <SongElement key={index.toString()} titulo={detail.name} />;
         })}
+        <h1 className="createsong">AGREGAR CANCION</h1>
+        <input
+          className="songname"
+          type="text"
+          placeholder={"Nombre de la cancion"}
+          onChange={(event) => setcurrentname(event.target.value)}
+        />
+        <select
+          className="songgenre"
+          style={genreselect}
+          onChange={(event) => setcurrentgenre(event.target.value)}
+        >
+          <option></option>
+          {availablegenres.fetchedData.map((detail, index) => {
+            return <option key={index.toString()}>{detail.name}</option>;
+          })}
+        </select>
+        <input
+          type="text"
+          className="songlink"
+          placeholder={"Link (Youtube)"}
+          onChange={(event) => setcurrentlink(event.target.value)}
+        />
+        <input
+          className="songdate"
+          type="date"
+          onChange={(event) => setcurrentdate(event.target.value)}
+        ></input>
+        <button
+          className="confirm"
+          onClick={() => {
+            sendData(currentname, currentgenre, currentlink, currentdate);
+          }}
+        >
+          Enviar
+        </button>
       </div>
     </div>
   );
