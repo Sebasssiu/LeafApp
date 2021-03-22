@@ -79,7 +79,9 @@ const Search = () => {
   const searchfunction = () => {
     localStorage.removeItem("name");
     localStorage.removeItem("link");
-    setCurrentSong(info[0]);
+    console.log(info[0])
+    if (info[0]) setCurrentSong(info[0]);
+    else alert("Lo lamento la cancion que buscas no esta en nuestros servidores.")
   };
 
   const linksearch = "songs/?search=" + songUser;
@@ -93,6 +95,7 @@ const Search = () => {
     setSongUser(e.target.value);
   };
 
+  console.log(currentSong)
   const validacion = useApi({
     link: "songs/validation/",
     method: "POST",
@@ -104,7 +107,7 @@ const Search = () => {
   });
 
   useEffect(() => {
-    //console.log(validacion.fetchedData)
+    console.log(validacion.fetchedData)
     if (validacion.fetchedData) {
       if (validacion.fetchedData.error) {
         alert(
@@ -133,8 +136,8 @@ const Search = () => {
 
   if (data.isLoading) {
     return (
-      <div>
-        <h1>is loading</h1>
+      <div className="container">
+          <div className="loading"/>
       </div>
     );
   } else {
