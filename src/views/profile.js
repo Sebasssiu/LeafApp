@@ -79,6 +79,9 @@ const Profile = () => {
         {data.fetchedData.isAdmin ? (
           <button onClick={ () => history.push('/modifySongs')}>Modify Data</button>
         ) : null}
+        {data.fetchedData.isAdmin ? (
+          <button onClick={ () => history.push('/dataReport')}>Data Report</button>
+        ) : null}
       </div>
     )
   }

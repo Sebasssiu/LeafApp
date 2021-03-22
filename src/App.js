@@ -11,6 +11,7 @@ import ModifySongDetails from "./views/modifySongDetails";
 import PlaylistForm from "./components/PlaylistForm";
 import AlbumForm from "./components/AlbumForm";
 import Item from './views/item'
+import ReportData from './views/dataReport'
 
 
 export const UserContext = createContext();
@@ -52,6 +53,9 @@ const App = () => {
           </Route>
           <Route exact path='/modifySongs/modify/item'>
             <Item />
+          </Route>
+          <Route exact path='/dataReport'>
+            <ReportData />
           </Route>
         </Switch>
       </Router>
