@@ -12,6 +12,7 @@ import PlaylistForm from "./components/PlaylistForm";
 import AlbumForm from "./components/AlbumForm";
 import Item from './views/item'
 import ReportData from './views/dataReport'
+import DataReportItem from "./views/dataReportItem";
 
 
 export const UserContext = createContext();
@@ -56,6 +57,9 @@ const App = () => {
           </Route>
           <Route exact path='/dataReport'>
             <ReportData />
+          </Route>
+          <Route exact path='/dataReport/reportItem'>
+            <DataReportItem />
           </Route>
         </Switch>
       </Router>
