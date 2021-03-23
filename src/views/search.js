@@ -63,13 +63,6 @@ const Search = () => {
     call: isAdd,
   });
 
-  const songPlayList = localStorage.getItem("name");
-  if (songPlayList) {
-    const linkPlayList = localStorage.getItem("link");
-    search.song = songPlayList;
-    search.link = linkPlayList;
-  }
-
   useEffect(() => {
     if (atras) history.push("/");
   }, [atras]);
@@ -119,7 +112,7 @@ const Search = () => {
     link: "songs/validation/",
     method: "POST",
     body: {
-      song: currentSong.id,
+      song: currentSong ? currentSong.id : 1,
       token: token.token,
     },
     call: currentSong,
@@ -170,6 +163,24 @@ const Search = () => {
   }, [addPlaylist]);
   console.log(open);
   console.log(playlist);
+
+  const songPlayList = localStorage.getItem("name");
+  const lo = "songs/?search=" + songPlayList;
+    const i = useApi({
+      link: lo,
+      method: "GET",
+      token: token,
+    }).fetchedData;
+  if (songPlayList) {
+    const linkPlayList = localStorage.getItem("link");
+    search.artist = '';
+    search.song = songPlayList;
+    search.link = linkPlayList;
+    const s = i[0]
+    console.log(i[0])
+    console.log(currentSong)
+    //setCurrentSong(s)
+  }
 
   if (data.isLoading || plnames.isLoading) {
     return (
