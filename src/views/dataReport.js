@@ -42,7 +42,7 @@ const ReportData = () => {
           state: {
             numberQuery: '3',
             query: 'Cantidad de nuevas suscripciones mensuales durantelos últimos seis meses:',
-            linkApi: 'albums/recentalbums/' //cambiarlo cuando este el nuevo
+            linkApi: 'premium/lastsuscriptions/' //cambiarlo cuando este el nuevo
           }
         })}
         >

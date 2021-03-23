@@ -12,7 +12,7 @@ const DataReportItem = () => {
     method: 'GET'
   })
 
-  console.log(data)
+  console.log(data, numberQuery)
   
 
   if (data.isLoading){
@@ -51,15 +51,49 @@ const DataReportItem = () => {
     )
   }
   if (numberQuery === '3') {
-    <div className='container' >
+    return (
+      <div className='container' >
         <h1>{query}</h1>
         <div className='dataobtenida'>
-          <h1>hola</h1>          
+          <h2>En los ultimos 6 meses se han suscrito {data.fetchedData} personas</h2>          
         </div>
       </div>
+    )
+  }
+  if (numberQuery === '4') {
+    return (
+      <div className='container' >
+        <h1>{query}</h1>
+        <div className='dataobtenida'>
+          <h2>ersonas</h2>          
+        </div>
+      </div>
+    )
+  }
+  if (numberQuery === '5') {
+    return (
+      <div className='container' >
+        <h1>{query}</h1>
+        <div className='dataobtenida'>
+          <h2>sonas</h2>          
+        </div>
+      </div>
+    )
+  }
+  if (numberQuery === '6') {
+    return (
+      <div className='container' >
+        <h1>{query}</h1>
+        <div className='dataobtenida'>
+          <h2> personas</h2>          
+        </div>
+      </div>
+    )
   }
   return (
-    <h2>vacio</h2>
+    <div className='container' >
+      <h1>Lamentablemente ocurrio un error con el dato que buscas, se hara la consulta para el siguiente reporte</h1>
+    </div>
   )
 }
 
