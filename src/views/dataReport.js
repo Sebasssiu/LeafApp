@@ -24,7 +24,7 @@ const ReportData = () => {
           },
         })}
         >
-          Álbumes más recientes de la última semana  ={">"}
+          Álbumes más recientes de la última semana        {">"}
         </li>
         <li className='queriesTitle' onClick={() => history.push({
           pathname: '/dataReport/reportItem',
@@ -35,7 +35,7 @@ const ReportData = () => {
           }
         })}
         >
-          Artistas con popularidad creciente en los últimostres meses ={">"}
+          Artistas con popularidad creciente en los últimostres meses          {">"}
         </li>
         <li className='queriesTitle' onClick={() => history.push({
           pathname: '/dataReport/reportItem',
@@ -46,7 +46,7 @@ const ReportData = () => {
           }
         })}
         >
-          Cantidad de nuevas suscripciones mensuales durantelos últimos seis meses ={">"}
+          Cantidad de nuevas suscripciones mensuales durantelos últimos seis meses         {">"}
         </li>
         <li className='queriesTitle' onClick={() => history.push({
           pathname: '/dataReport/reportItem',
@@ -57,7 +57,7 @@ const ReportData = () => {
           }
         })}
         >
-          Artistas con mayor producción musical ={">"}
+          Artistas con mayor producción musical            {">"}
         </li>
         <li className='queriesTitle' onClick={() => history.push({
           pathname: '/dataReport/reportItem',
@@ -68,7 +68,7 @@ const ReportData = () => {
           }
         })}
         >
-          Géneros más populares ={">"}
+          Géneros más populares           {">"}
         </li>
         <li className='queriesTitle' onClick={() => history.push({
           pathname: '/dataReport/reportItem',
@@ -79,7 +79,7 @@ const ReportData = () => {
           }
         })}
         >
-          Usuarios más activos en la plataforma ={">"}
+          Usuarios más activos en la plataforma        {">"}
         </li>
       </ol>
     </div>
