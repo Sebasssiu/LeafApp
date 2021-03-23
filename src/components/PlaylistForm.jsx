@@ -38,6 +38,8 @@ const PlaylistForm = () => {
   const wrap = {
     display: "flex",
     position: "relative",
+    backgroundColor: "rgb(3, 5, 12)",
+    minHeight: "100vh",
   };
   const sideb = {
     position: "fixed",
@@ -112,7 +114,13 @@ const PlaylistForm = () => {
           {pname}
         </h1>
         {currentsongs.map((detail, index) => {
-          return <SongElement key={index.toString()} titulo={detail.name} link={detail.link} />;
+          return (
+            <SongElement
+              key={index.toString()}
+              titulo={detail.name}
+              link={detail.link}
+            />
+          );
         })}
       </div>
     </div>
