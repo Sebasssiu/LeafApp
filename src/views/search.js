@@ -17,22 +17,30 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import AddIcon from "@material-ui/icons/Add";
 
 const Search = () => {
-  const history = useHistory();
+  const token = useContext(UserContext)
+  const history = useHistory()
+  const [playlist, setPlaylist] = useState('')
   const [search, setSearch] = useState({
     artist: "Reik",
     song: "Si me dices que si",
     link: "https://www.youtube.com/embed/ieodxKMYRf8",
-  });
-  const [songUser, setSongUser] = useState("piano");
-  const [atras, setAtras] = useState(false);
+  })
+  const [songUser, setSongUser] = useState("piano")
+  const [atras, setAtras] = useState(false)
   const [currentSong, setCurrentSong] = useState({
     artist: "Reik",
     song: "Si me dices que si",
     link: "https://www.youtube.com/embed/ieodxKMYRf8",
-  });
-  const token = useContext(UserContext);
+  })
   const linkSearch = "genres/";
   let ownerid = token.token;
+  /*Para agregar a la playlist*/ 
+  console.log(token.user_id)
+  const [body, setBody] = useState({
+    owner: token.user_id,
+    name: '',
+    songs: [],
+  })
 
   const plnames = useApi({
     link: "playlists/userPlaylist/",
@@ -47,6 +55,15 @@ const Search = () => {
     method: "GET",
     token: token,
   });
+  
+  const [isAdd, setIsAdd] = useState(false)
+  const addToPlayList = useApi({
+    link:'playlists/',
+    method:'POST',
+    body,
+    call: isAdd,
+  })
+  
 
   const songPlayList = localStorage.getItem("name");
   if (songPlayList) {
@@ -136,7 +153,21 @@ const Search = () => {
     localStorage.removeItem("link");
     setCurrentSong(song);
   };
+  const addPlaylist = () => {
+    if (playlist === '' || playlist === 'empty') {
+      alert("Please select a valid playlist to add.")
+    }
+    else {
+      setIsAdd(isAdd ? false : true)
+      setBody({
+        ...body,
+        songs: currentSong,
+        name: playlist,
+      })
+    }
+  }
   console.log(open)
+  console.log(playlist)
 
   if (data.isLoading) {
     return (
@@ -223,15 +254,15 @@ const Search = () => {
             frameBorder="10"
           />
           <div className="playlistsection">
-            <select className="playListSelection">
-              <option></option>
+            <select className="playListSelection" onChange={(e) => setPlaylist(e.target.value)}>
+              <option value="empty">Select your playlist</option>
               {plnames.fetchedData.map((detail, index) => {
-                return <option key={index.toString()}>{detail.name}</option>;
+                return <option key={index.toString()} value={detail.name}>{detail.name}</option>;
               })}
             </select>
             <button
               className="buttonAddPlayList"
-              onClick={() => console.log(currentSong)}
+              onClick={addPlaylist}
             >
               <AddIcon style={{ color: green[500], fontSize: 30 }} />
             </button>
