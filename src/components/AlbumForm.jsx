@@ -13,6 +13,7 @@ const AlbumForm = () => {
   const [currentdate, setcurrentdate] = useState("");
   const [showform, setformstate] = useState(false);
   const [booleancall, setcall] = useState(false);
+  const [displaytext, setdisplaytext] = useState(false);
   const token = useContext(UserContext);
   let ownerid = token.token;
 
@@ -46,9 +47,10 @@ const AlbumForm = () => {
           album: currentalbumid,
         }),
       });
+      alert("Song added, refresh page to see changes");
       // aqui hay que setear el estado
       //setcurrentalbums
-      console.log(plnames);
+      setcall(!booleancall);
     } else {
       alert("Ingresa todos los campos");
     }
@@ -121,6 +123,10 @@ const AlbumForm = () => {
     height: "50px",
   };
 
+  const textstyle = {
+    color: "white",
+  };
+
   if (plnames.isLoading || availablegenres.isLoading) {
     return (
       <div className="container">
@@ -141,6 +147,7 @@ const AlbumForm = () => {
                 key={index.toString()}
                 style={listitem}
                 onClick={() => {
+                  setdisplaytext(true);
                   setformstate(true);
                   setcurrentalbums(detail.almbum_songs);
                   setcurrentalbumid(detail.id);
@@ -156,19 +163,25 @@ const AlbumForm = () => {
         </button>
       </div>
       <div className="maincontent" style={content}>
-        {currentalbums.map((detail, index) => {
-          if (detail.is_active === true) {
-            return (
-              <SongElement
-                key={index.toString()}
-                titulo={detail.name}
-                link={detail.link}
-                todo={detail}
-              />
-            );
-          }
-        })}
-        {showform == true ? (
+        {displaytext === false ? (
+          <div className="padre">
+            <h1 style={textstyle}>Selecicona un album</h1>
+            <h2 style={textstyle}>Pasos para obtener el link de tu cancion</h2>
+            <ol>
+              <li>Ingresar a tu cancion en Youtube</li>
+              <li>
+                En la parte inferior del video, seleccionar la opción de
+                compartir
+              </li>
+              <li>Seleccionar la opcion de "Incorporar"</li>
+              <li>Copiar el link que proporciona youtube</li>
+              <li>
+                Ejemplo de link: https://www.youtube.com/embed/fEYUoBgYKzw
+              </li>
+            </ol>
+          </div>
+        ) : null}
+        {showform === true ? (
           <div className="father" style={content2}>
             <h1 className="createsong">AGREGAR CANCION</h1>
             <input
@@ -209,6 +222,18 @@ const AlbumForm = () => {
             </button>
           </div>
         ) : null}
+        {currentalbums.map((detail, index) => {
+          if (detail.is_active === true) {
+            return (
+              <SongElement
+                key={index.toString()}
+                titulo={detail.name}
+                link={detail.link}
+                todo={detail}
+              />
+            );
+          }
+        })}
       </div>
     </div>
   );
