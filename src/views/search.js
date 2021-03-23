@@ -116,11 +116,6 @@ const Search = () => {
     console.log(i[0])
     console.log(currentSong)
     console.log(search)
-    //setCurrentSong(s)
-    /*localStorage.removeItem("name")
-    localStorage.removeItem("link")
-    setSongUser(songPlayList)
-    searchfunction()*/
   }
 
 
