@@ -164,7 +164,22 @@ const AlbumForm = () => {
       </div>
       <div className="maincontent" style={content}>
         {displaytext === false ? (
-          <h1 style={textstyle}>Selecicona un album</h1>
+          <div className="padre">
+            <h1 style={textstyle}>Selecicona un album</h1>
+            <h2 style={textstyle}>Pasos para obtener el link de tu cancion</h2>
+            <ol>
+              <li>Ingresar a tu cancion en Youtube</li>
+              <li>
+                En la parte inferior del video, seleccionar la opción de
+                compartir
+              </li>
+              <li>Seleccionar la opcion de "Incorporar"</li>
+              <li>Copiar el link que proporciona youtube</li>
+              <li>
+                Ejemplo de link: https://www.youtube.com/embed/fEYUoBgYKzw
+              </li>
+            </ol>
+          </div>
         ) : null}
         {showform === true ? (
           <div className="father" style={content2}>
