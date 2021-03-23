@@ -147,7 +147,7 @@ const AlbumForm = () => {
                 key={index.toString()}
                 style={listitem}
                 onClick={() => {
-                  setdisplaytext(!displaytext);
+                  setdisplaytext(true);
                   setformstate(true);
                   setcurrentalbums(detail.almbum_songs);
                   setcurrentalbumid(detail.id);
