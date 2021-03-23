@@ -13,6 +13,7 @@ const PlaylistForm = () => {
   const [pname, setpname] = useState("");
   const token = useContext(UserContext);
   const [booleancall, setcall] = useState(false);
+  const [emptylist, setemptylist] = useState(false);
   let ownerid = token.token;
 
   const plnames = useApi({
@@ -80,6 +81,9 @@ const PlaylistForm = () => {
     right: "0",
     bottom: "0",
   };
+  const emptystyle = {
+    color: "white",
+  };
   if (plnames.isLoading) {
     return (
       <div className="container">
@@ -100,8 +104,14 @@ const PlaylistForm = () => {
                 key={index.toString()}
                 style={listitem}
                 onClick={() => {
-                  setcurrentsongs(detail.songs);
-                  //setpname(plnames[index].name);
+                  if (detail.songs.length === 0) {
+                    console.log("vacio");
+                    setcurrentsongs(detail.songs);
+                    setemptylist(false);
+                  } else {
+                    setemptylist(true);
+                    setcurrentsongs(detail.songs);
+                  }
                 }}
               >
                 {detail.name}
@@ -117,6 +127,12 @@ const PlaylistForm = () => {
         <h1 className="playlisttitle" style={sidetitle}>
           {pname}
         </h1>
+        {emptylist === false ? (
+          <h1 style={emptystyle}>
+            Esta playlist está vacía, agrega canciones en el reproductor de
+            musica
+          </h1>
+        ) : null}
         {currentsongs.map((detail, index) => {
           if (detail.is_active === true) {
             return (
