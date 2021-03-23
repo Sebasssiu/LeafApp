@@ -3,6 +3,7 @@ import SongElement from "./SongElement";
 import { UserContext } from "../App";
 import useApi from "../customHooks/useApi";
 import "../styles/inputPages.css";
+import { Details } from "@material-ui/icons";
 
 const PlaylistForm = () => {
   //const [plnames, setplnames] = useState([]);
@@ -117,14 +118,16 @@ const PlaylistForm = () => {
           {pname}
         </h1>
         {currentsongs.map((detail, index) => {
-          return (
-            <SongElement
-              key={index.toString()}
-              titulo={detail.name}
-              link={detail.link}
-              todo={detail}
-            />
-          );
+          if (detail.is_active === true) {
+            return (
+              <SongElement
+                key={index.toString()}
+                titulo={detail.name}
+                link={detail.link}
+                todo={detail}
+              />
+            );
+          }
         })}
       </div>
     </div>
