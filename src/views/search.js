@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../App";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import useApi from "../customHooks/useApi";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
@@ -17,7 +17,11 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import AddIcon from "@material-ui/icons/Add";
 
 const Search = () => {
+  const location = useLocation()
   const token = useContext(UserContext);
+  console.log(location)
+  //const datos  = location.state.datos
+  console.log(location.state)
   const history = useHistory();
   const [playlist, setPlaylist] = useState("");
   const [search, setSearch] = useState({
@@ -27,7 +31,7 @@ const Search = () => {
   });
   const [songUser, setSongUser] = useState("piano");
   const [atras, setAtras] = useState(false);
-  const [currentSong, setCurrentSong] = useState({
+  const [currentSong, setCurrentSong] = useState(location.state ? location.state.datos: {
     artist: "Reik",
     song: "Si me dices que si",
     link: "https://www.youtube.com/embed/ieodxKMYRf8",
@@ -103,6 +107,32 @@ const Search = () => {
     token: token,
   }).fetchedData;
 
+  console.log(localStorage.getItem("name"))
+  const songPlayList = localStorage.getItem("name");
+  const lo = "songs/?search=" + songPlayList;
+  console.log(lo)
+  const i = useApi({
+    link: lo,
+    method: "GET",
+    token: token,
+  }).fetchedData;
+  if (songPlayList !== null) {
+    const linkPlayList = localStorage.getItem("link");
+    search.artist = '';
+    search.song = songPlayList;
+    search.link = linkPlayList;
+    const s = i[0]
+    console.log(i[0])
+    console.log(currentSong)
+    console.log(search)
+    //setCurrentSong(s)
+    /*localStorage.removeItem("name")
+    localStorage.removeItem("link")
+    setSongUser(songPlayList)
+    searchfunction()*/
+  }
+
+
   const changeInput = (e) => {
     setSongUser(e.target.value);
   };
@@ -163,24 +193,6 @@ const Search = () => {
   }, [addPlaylist]);
   console.log(open);
   console.log(playlist);
-
-  const songPlayList = localStorage.getItem("name");
-  const lo = "songs/?search=" + songPlayList;
-    const i = useApi({
-      link: lo,
-      method: "GET",
-      token: token,
-    }).fetchedData;
-  if (songPlayList) {
-    const linkPlayList = localStorage.getItem("link");
-    search.artist = '';
-    search.song = songPlayList;
-    search.link = linkPlayList;
-    const s = i[0]
-    console.log(i[0])
-    console.log(currentSong)
-    //setCurrentSong(s)
-  }
 
   if (data.isLoading || plnames.isLoading) {
     return (

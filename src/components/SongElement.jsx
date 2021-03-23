@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-const SongElement = ({ titulo, artista, link }) => {
+const SongElement = ({ titulo, artista, link, todo }) => {
   const history = useHistory();
   const [play, setplay] = useState(false);
 
@@ -11,7 +11,12 @@ const SongElement = ({ titulo, artista, link }) => {
       const l = link
       localStorage.setItem("name", titulo )
       localStorage.setItem("link", link );
-      history.push("/search");
+      history.push({
+        pathname: '/search',
+        state:{
+          datos: todo
+        }
+      });
     }
   }, [play]);
 
