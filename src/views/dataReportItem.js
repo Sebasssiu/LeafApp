@@ -43,7 +43,7 @@ const DataReportItem = () => {
         <div className='dataobtenida'>
           {data.fetchedData.map(artist => {
             return (
-              <h2>{artist.name}</h2>
+              <h2>{artist[0]} con reproducciones de todas las canciones de: {artist[1]}</h2>
             )
           })} 
         </div>
@@ -65,7 +65,11 @@ const DataReportItem = () => {
       <div className='container' >
         <h1>{query}</h1>
         <div className='dataobtenida'>
-          <h2>ersonas</h2>          
+          {data.fetchedData.map(artist => {
+            return (
+              <h2>El artista: "{artist.user}" con un total de canciones: {artist.total}</h2>
+            )
+          })}          
         </div>
       </div>
     )
@@ -75,7 +79,11 @@ const DataReportItem = () => {
       <div className='container' >
         <h1>{query}</h1>
         <div className='dataobtenida'>
-          <h2>sonas</h2>          
+          {data.fetchedData.map((genero, index) => {
+            return (
+              <h2 key={index}>Genero musical: {genero[0]} con un total de reproducciones de: {genero[1]}</h2> 
+            )
+          })}         
         </div>
       </div>
     )
@@ -85,7 +93,11 @@ const DataReportItem = () => {
       <div className='container' >
         <h1>{query}</h1>
         <div className='dataobtenida'>
-          <h2> personas</h2>          
+          {data.fetchedData.map(usuario => {
+            return (
+              <h2>{usuario.user} con un total de reproducciones de: {usuario.total}</h2> 
+            )
+          })}         
         </div>
       </div>
     )

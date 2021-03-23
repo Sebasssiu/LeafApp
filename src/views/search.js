@@ -37,9 +37,8 @@ const Search = () => {
   /*Para agregar a la playlist*/ 
   console.log(token.user_id)
   const [body, setBody] = useState({
-    owner: token.user_id,
-    name: '',
-    songs: [],
+    playlist_id: '',
+    song_id:'',
   })
 
   const plnames = useApi({
@@ -58,7 +57,7 @@ const Search = () => {
   
   const [isAdd, setIsAdd] = useState(false)
   const addToPlayList = useApi({
-    link:'playlists/',
+    link:'playlists/addSongToPlaylist/',
     method:'POST',
     body,
     call: isAdd,
@@ -161,15 +160,18 @@ const Search = () => {
       setIsAdd(isAdd ? false : true)
       setBody({
         ...body,
-        songs: currentSong,
-        name: playlist,
+        song_id: currentSong.id,
+        playlist_id: playlist,
       })
     }
   }
+  useEffect(() => {
+    if (addToPlayList.fetchedData.response) alert("Your song was succefully added to the playlist.")
+  }, [addPlaylist])
   console.log(open)
   console.log(playlist)
 
-  if (data.isLoading) {
+  if (data.isLoading || plnames.isLoading) {
     return (
       <div className="container">
           <div className="loading"/>
@@ -257,7 +259,7 @@ const Search = () => {
             <select className="playListSelection" onChange={(e) => setPlaylist(e.target.value)}>
               <option value="empty">Select your playlist</option>
               {plnames.fetchedData.map((detail, index) => {
-                return <option key={index.toString()} value={detail.name}>{detail.name}</option>;
+                return <option key={index.toString()} value={detail.id}>{detail.name}</option>;
               })}
             </select>
             <button

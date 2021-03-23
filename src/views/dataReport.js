@@ -31,7 +31,7 @@ const ReportData = () => {
           state: {
             numberQuery: '2',
             query: 'Artistas con popularidad creciente en los últimos tres meses:',
-            linkApi: 'albums/recentalbums/' //cambiarlo cuando este el nuevo
+            linkApi: 'listen/getingpopular/' //cambiarlo cuando este el nuevo
           }
         })}
         >
@@ -42,7 +42,7 @@ const ReportData = () => {
           state: {
             numberQuery: '3',
             query: 'Cantidad de nuevas suscripciones mensuales durantelos últimos seis meses:',
-            linkApi: 'premium/lastsuscriptions/' //cambiarlo cuando este el nuevo
+            linkApi: 'premium/lastsuscriptions/'
           }
         })}
         >
@@ -53,7 +53,7 @@ const ReportData = () => {
           state: {
             numberQuery: '4',
             query: 'Artistas con mayor producción musical:',
-            linkApi: 'albums/recentalbums/' //cambiarlo cuando este el nuevo
+            linkApi: 'songs/popularartists/' 
           }
         })}
         >
@@ -64,7 +64,7 @@ const ReportData = () => {
           state: {
             numberQuery: '5',
             query: 'Generos mas populares:',
-            linkApi: 'albums/recentalbums/' //cambiarlo cuando este el nuevo
+            linkApi: 'listen/populargenres/'
           }
         })}
         >
@@ -75,7 +75,7 @@ const ReportData = () => {
           state: {
             numberQuery: '6',
             query: 'Usuarios mas activos en la plataforma:',
-            linkApi: 'albums/recentalbums/' //cambiarlo cuando este el nuevo
+            linkApi: 'listen/mostactive/'
           }
         })}
         >
