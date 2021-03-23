@@ -11,10 +11,12 @@ const PlaylistForm = () => {
   const [currentsongs, setcurrentsongs] = useState([]);
   const [pname, setpname] = useState("");
   const token = useContext(UserContext);
+  const [booleancall, setcall] = useState(false);
   let ownerid = token.token;
 
   const plnames = useApi({
     link: "playlists/userPlaylist/",
+    call: booleancall,
     method: "POST",
     body: {
       token: ownerid,
@@ -33,6 +35,7 @@ const PlaylistForm = () => {
         name: playname,
       }),
     });
+    setcall(!booleancall);
   };
 
   const wrap = {
