@@ -9,6 +9,7 @@ import '../styles/premium.css'
 
 const Premium = () => {
     const history = useHistory()
+    const [missing, setMissing] = useState(true)
     const [link, setLink] = useState('')
     const [bilingInfo, setBillingInfo] = useState(
         {
@@ -49,7 +50,11 @@ const Premium = () => {
         if (payment.fetchedData.response) history.push('/')
     }, [payment])
     const payClick = () => {
-        setLink('premium/premiumPay/')
+        if (bilingInfo.cvc !== '' && bilingInfo.expiry !== '' && bilingInfo.focus !== '' && bilingInfo.name !== '' && bilingInfo.number !== '') {
+            setLink('premium/premiumPay/')
+        } else {
+            setMissing(false)
+        }
     }
 
     if (data.isLoading) {
@@ -110,6 +115,7 @@ const Premium = () => {
                                 />
                             </form>
                             <button onClick={payClick}>Pay ${price}</button>
+                            {!missing ? <h1 className='missingData'>Por favor llenar todos los campos.</h1> : (null) }
                         </div>
                     )
                 }   

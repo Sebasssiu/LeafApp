@@ -39,3 +39,7 @@ input {
   background-image: url("https://www.ecostudioxv.com/assets/images/loader.gif");
   background-size: cover;
 }
+
+.missingData{
+  color:  rgb(6, 182, 6);
+}
