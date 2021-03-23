@@ -11,10 +11,7 @@ const NavBar = ({ token }) => {
             <a href="#home">Home</a>
           </li>
           <li>
-            <a href="/aboutUs">About Us</a>
-          </li>
-          <li>
-            <a href="/aboutUs">Contact Us</a>
+            <a href="#aboutUs">About Us</a>
           </li>
           {token.token ? (
             <>
