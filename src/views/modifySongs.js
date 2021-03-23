@@ -29,7 +29,7 @@ const ModifySongs = () => {
       <button onClick={() => history.push({
         pathname: '/modifySongs/modify',
          state: {
-           option: 'songs/'
+           option: 'allSongs/'
          },  
         })}
       >
