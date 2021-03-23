@@ -50,6 +50,14 @@ const DataReportItem = () => {
       </div>
     )
   }
+  if (numberQuery === '3') {
+    <div className='container' >
+        <h1>{query}</h1>
+        <div className='dataobtenida'>
+          <h1>hola</h1>          
+        </div>
+      </div>
+  }
   return (
     <h2>vacio</h2>
   )

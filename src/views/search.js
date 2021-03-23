@@ -60,7 +60,7 @@ const Search = () => {
   }, [atras]);
 
   let linkCancion = search.link + "?autoplay=1&mute=0";
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState({});
 
   const styleHeaderList = {
     color: "rgb(6, 182, 6)",
@@ -72,8 +72,11 @@ const Search = () => {
     lineHeight: "48px",
   };
 
-  const handleClick = () => {
-    setOpen(!open);
+  const handleClick = (index) => {
+    setOpen({
+      ...open, [index]:!open [index] 
+
+    });
   };
 
   const searchfunction = () => {
@@ -133,6 +136,7 @@ const Search = () => {
     localStorage.removeItem("link");
     setCurrentSong(song);
   };
+  console.log(open)
 
   if (data.isLoading) {
     return (
@@ -175,14 +179,14 @@ const Search = () => {
             }
             className="listaGeneros"
           >
-            {data.fetchedData.map((genero) => {
+            {data.fetchedData.map((genero, index) => {
               return (
                 <>
-                  <ListItem button onClick={handleClick} id={genero.id}>
+                  <ListItem button onClick={handleClick.bind(null,index)} id={genero.id}>
                     <ListItemText primary={genero.name} />
-                    {open ? <ExpandLess /> : <ExpandMore />}
+                    {open[index] ? <ExpandLess /> : <ExpandMore />}
                   </ListItem>
-                  <Collapse in={open} timeout="auto" unmountOnExit>
+                  <Collapse in={open[index]} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
                       {genero.songs.map((song) => {
                         return (
