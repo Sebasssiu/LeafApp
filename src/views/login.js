@@ -13,7 +13,7 @@ const Login = () => {
     const [creadentials, setCredentials] = useState({ user: '', pass: '' })
     const token = useContext(UserContext)
     const data = useApi({
-        link: 'auth', 
+        link: 'api-token-auth/', 
         method: 'POST',
         body: {
             username: creadentials.user,
@@ -25,6 +25,7 @@ const Login = () => {
       if (data.fetchedData.token) {
         token.setToken(data.fetchedData.token)
         localStorage.setItem('token', data.fetchedData.token)
+        localStorage.setItem('user_id', data.fetchedData.user_id)
         history.push('/')
       }
     }

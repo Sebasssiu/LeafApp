@@ -17,9 +17,10 @@ import DataReportItem from "./views/dataReportItem";
 
 export const UserContext = createContext();
 const App = () => {
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const [token, setToken] = useState(localStorage.getItem('token'))
+  const user_id = localStorage.getItem('user_id')
   return (
-    <UserContext.Provider value={{ token: token, setToken: setToken }}>
+    <UserContext.Provider value={{ token, setToken: setToken, user_id }}>
       <Router>
         <Switch>
           <Route exact path="/">
