@@ -10,7 +10,8 @@ const Signup = () => {
     const history = useHistory()
     const [credentials, setCredentials] = useState({user: '', pass: '', rePass: ''})
     const [isSignup, setIsSignup] = useState(false)
-    useApi({
+    const [validation, setValidation] = useState(false)
+    const userPost = useApi({
         link: 'user/', 
         method: 'POST',
         body: {
@@ -25,7 +26,18 @@ const Signup = () => {
     const signup = () => {
         if (credentials.pass === credentials.rePass && credentials.pass !== '' && credentials.user !== '') {
             setIsSignup(true)
+        } 
+        if (credentials.pass !== credentials.rePass) {
+          setValidation(true)
         }
+    }
+
+    if (userPost.isLoading) {
+      return (
+        <div className="container">
+          <div className="loading"/>
+        </div>
+      )
     }
     return (
         <div className="container">
@@ -57,6 +69,9 @@ const Signup = () => {
                     onChange = {e => setCredentials({...credentials, rePass: e.target.value})}
                 />
             </div>
+            {validation ? (
+              <h4 className="error">That username already exists or the password confirmation is wrong</h4>
+            ) : null}
             <button onClick={signup}>Sign up</button>
         </div>
     )
