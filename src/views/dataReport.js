@@ -35,7 +35,7 @@ const ReportData = () => {
           }
         })}
         >
-          Artistas con popularidad creciente en los últimostres meses          {">"}
+          Artistas con popularidad creciente en los últimos tres meses          {">"}
         </li>
         <li className='queriesTitle' onClick={() => history.push({
           pathname: '/dataReport/reportItem',
@@ -46,7 +46,7 @@ const ReportData = () => {
           }
         })}
         >
-          Cantidad de nuevas suscripciones mensuales durantelos últimos seis meses         {">"}
+          Cantidad de nuevas suscripciones mensuales durante los últimos seis meses         {">"}
         </li>
         <li className='queriesTitle' onClick={() => history.push({
           pathname: '/dataReport/reportItem',
