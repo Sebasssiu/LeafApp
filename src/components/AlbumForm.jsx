@@ -66,6 +66,8 @@ const AlbumForm = () => {
   const wrap = {
     display: "flex",
     position: "relative",
+    backgroundColor: "rgb(3, 5, 12)",
+    minHeight: "100vh",
   };
   const sideb = {
     position: "fixed",

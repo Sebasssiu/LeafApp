@@ -17,29 +17,29 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import AddIcon from "@material-ui/icons/Add";
 
 const Search = () => {
-  const token = useContext(UserContext)
-  const history = useHistory()
-  const [playlist, setPlaylist] = useState('')
+  const token = useContext(UserContext);
+  const history = useHistory();
+  const [playlist, setPlaylist] = useState("");
   const [search, setSearch] = useState({
     artist: "Reik",
     song: "Si me dices que si",
     link: "https://www.youtube.com/embed/ieodxKMYRf8",
-  })
-  const [songUser, setSongUser] = useState("piano")
-  const [atras, setAtras] = useState(false)
+  });
+  const [songUser, setSongUser] = useState("piano");
+  const [atras, setAtras] = useState(false);
   const [currentSong, setCurrentSong] = useState({
     artist: "Reik",
     song: "Si me dices que si",
     link: "https://www.youtube.com/embed/ieodxKMYRf8",
-  })
+  });
   const linkSearch = "genres/";
   let ownerid = token.token;
-  /*Para agregar a la playlist*/ 
-  console.log(token.user_id)
+  /*Para agregar a la playlist*/
+  console.log(token.user_id);
   const [body, setBody] = useState({
-    playlist_id: '',
-    song_id:'',
-  })
+    playlist_id: "",
+    song_id: "",
+  });
 
   const plnames = useApi({
     link: "playlists/userPlaylist/",
@@ -54,15 +54,14 @@ const Search = () => {
     method: "GET",
     token: token,
   });
-  
-  const [isAdd, setIsAdd] = useState(false)
+
+  const [isAdd, setIsAdd] = useState(false);
   const addToPlayList = useApi({
-    link:'playlists/addSongToPlaylist/',
-    method:'POST',
+    link: "playlists/addSongToPlaylist/",
+    method: "POST",
     body,
     call: isAdd,
-  })
-  
+  });
 
   const songPlayList = localStorage.getItem("name");
   if (songPlayList) {
@@ -90,17 +89,18 @@ const Search = () => {
 
   const handleClick = (index) => {
     setOpen({
-      ...open, [index]:!open [index] 
-
+      ...open,
+      [index]: !open[index],
     });
   };
 
   const searchfunction = () => {
     localStorage.removeItem("name");
     localStorage.removeItem("link");
-    console.log(info[0])
+    console.log(info[0]);
     if (info[0]) setCurrentSong(info[0]);
-    else alert("Lo lamento la cancion que buscas no esta en nuestros servidores.")
+    else
+      alert("Lo lamento la cancion que buscas no esta en nuestros servidores.");
   };
 
   const linksearch = "songs/?search=" + songUser;
@@ -114,7 +114,7 @@ const Search = () => {
     setSongUser(e.target.value);
   };
 
-  console.log(currentSong)
+  console.log(currentSong);
   const validacion = useApi({
     link: "songs/validation/",
     method: "POST",
@@ -126,7 +126,7 @@ const Search = () => {
   });
 
   useEffect(() => {
-    console.log(validacion.fetchedData)
+    console.log(validacion.fetchedData);
     if (validacion.fetchedData) {
       if (validacion.fetchedData.error) {
         alert(
@@ -153,28 +153,28 @@ const Search = () => {
     setCurrentSong(song);
   };
   const addPlaylist = () => {
-    if (playlist === '' || playlist === 'empty') {
-      alert("Please select a valid playlist to add.")
-    }
-    else {
-      setIsAdd(isAdd ? false : true)
+    if (playlist === "" || playlist === "empty") {
+      alert("Please select a valid playlist to add.");
+    } else {
+      setIsAdd(isAdd ? false : true);
       setBody({
         ...body,
         song_id: currentSong.id,
         playlist_id: playlist,
-      })
+      });
     }
-  }
+  };
   useEffect(() => {
-    if (addToPlayList.fetchedData.response) alert("Your song was succefully added to the playlist.")
-  }, [addPlaylist])
-  console.log(open)
-  console.log(playlist)
+    if (addToPlayList.fetchedData.response)
+      alert("Your song was succefully added to the playlist.");
+  }, [addPlaylist]);
+  console.log(open);
+  console.log(playlist);
 
   if (data.isLoading || plnames.isLoading) {
     return (
       <div className="container">
-          <div className="loading"/>
+        <div className="loading" />
       </div>
     );
   } else {
@@ -215,7 +215,11 @@ const Search = () => {
             {data.fetchedData.map((genero, index) => {
               return (
                 <>
-                  <ListItem button onClick={handleClick.bind(null,index)} id={genero.id}>
+                  <ListItem
+                    button
+                    onClick={handleClick.bind(null, index)}
+                    id={genero.id}
+                  >
                     <ListItemText primary={genero.name} />
                     {open[index] ? <ExpandLess /> : <ExpandMore />}
                   </ListItem>
@@ -256,16 +260,20 @@ const Search = () => {
             frameBorder="10"
           />
           <div className="playlistsection">
-            <select className="playListSelection" onChange={(e) => setPlaylist(e.target.value)}>
+            <select
+              className="playListSelection"
+              onChange={(e) => setPlaylist(e.target.value)}
+            >
               <option value="empty">Select your playlist</option>
               {plnames.fetchedData.map((detail, index) => {
-                return <option key={index.toString()} value={detail.id}>{detail.name}</option>;
+                return (
+                  <option key={index.toString()} value={detail.id}>
+                    {detail.name}
+                  </option>
+                );
               })}
             </select>
-            <button
-              className="buttonAddPlayList"
-              onClick={addPlaylist}
-            >
+            <button className="buttonAddPlayList" onClick={addPlaylist}>
               <AddIcon style={{ color: green[500], fontSize: 30 }} />
             </button>
           </div>
