@@ -163,6 +163,7 @@ const AlbumForm = () => {
                 key={index.toString()}
                 titulo={detail.name}
                 link={detail.link}
+                todo={detail}
               />
             );
           }

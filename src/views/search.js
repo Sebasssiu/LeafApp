@@ -67,9 +67,7 @@ const Search = () => {
     call: isAdd,
   });
 
-  useEffect(() => {
-    if (atras) history.push("/");
-  }, [atras]);
+  
 
   let linkCancion = search.link + "?autoplay=1&mute=0";
   const [open, setOpen] = React.useState({});
@@ -193,6 +191,10 @@ const Search = () => {
   }, [addPlaylist]);
   console.log(open);
   console.log(playlist);
+
+  useEffect(() => {
+    if (atras) history.push("/");
+  }, [atras]);
 
   if (data.isLoading || plnames.isLoading) {
     return (
