@@ -19,9 +19,6 @@ import AddIcon from "@material-ui/icons/Add";
 const Search = () => {
   const location = useLocation()
   const token = useContext(UserContext);
-  console.log(location)
-  //const datos  = location.state.datos
-  console.log(location.state)
   const history = useHistory();
   const [playlist, setPlaylist] = useState("");
   const [search, setSearch] = useState({
@@ -39,7 +36,6 @@ const Search = () => {
   const linkSearch = "genres/";
   let ownerid = token.token;
   /*Para agregar a la playlist*/
-  console.log(token.user_id);
   const [body, setBody] = useState({
     playlist_id: "",
     song_id: "",
@@ -92,7 +88,6 @@ const Search = () => {
   const searchfunction = () => {
     localStorage.removeItem("name");
     localStorage.removeItem("link");
-    console.log(info[0]);
     if (info[0]) setCurrentSong(info[0]);
     else
       alert("Lo lamento la cancion que buscas no esta en nuestros servidores.");
@@ -105,10 +100,8 @@ const Search = () => {
     token: token,
   }).fetchedData;
 
-  console.log(localStorage.getItem("name"))
   const songPlayList = localStorage.getItem("name");
   const lo = "songs/?search=" + songPlayList;
-  console.log(lo)
   const i = useApi({
     link: lo,
     method: "GET",
@@ -135,7 +128,6 @@ const Search = () => {
     setSongUser(e.target.value);
   };
 
-  console.log(currentSong);
   const validacion = useApi({
     link: "songs/validation/",
     method: "POST",
@@ -147,7 +139,6 @@ const Search = () => {
   });
 
   useEffect(() => {
-    console.log(validacion.fetchedData);
     if (validacion.fetchedData) {
       if (validacion.fetchedData.error) {
         alert(
@@ -188,9 +179,7 @@ const Search = () => {
   useEffect(() => {
     if (addToPlayList.fetchedData.response)
       alert("Your song was succefully added to the playlist.");
-  }, [addPlaylist]);
-  console.log(open);
-  console.log(playlist);
+  }, [addToPlayList]);
 
   useEffect(() => {
     if (atras) history.push("/");
