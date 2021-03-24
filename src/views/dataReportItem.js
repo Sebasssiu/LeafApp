@@ -9,7 +9,7 @@ const DataReportItem = () => {
   const data = useApi({
     link: linkApi,
     method: 'GET'
-  })  
+  })
 
   if (data.isLoading){
     return (
@@ -51,7 +51,11 @@ const DataReportItem = () => {
       <div className='container' >
         <h1>{query}</h1>
         <div className='dataobtenida'>
-          <h2>En los ultimos 6 meses se han suscrito {data.fetchedData} personas</h2>          
+          {data.fetchedData.map(mes => {
+            return (
+              <h2 key={mes[0]}>En el mes numero {mes[0]} se suscribieron {mes[1]} personas</h2>
+            )
+          })}          
         </div>
       </div>
     )
