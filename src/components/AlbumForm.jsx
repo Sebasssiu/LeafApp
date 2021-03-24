@@ -66,7 +66,6 @@ const AlbumForm = () => {
         name: playname,
       }),
     });
-    setcall(!booleancall);
   };
 
   const wrap = {
