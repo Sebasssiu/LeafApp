@@ -37,6 +37,9 @@ input {
   background-size: contain;
   background-repeat: no-repeat;
 }
+.createsong {
+  color: white;
+}
 
 input[type="checkbox"] {
   height: 30px;

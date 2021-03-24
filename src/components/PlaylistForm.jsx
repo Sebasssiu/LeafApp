@@ -31,9 +31,7 @@ const PlaylistForm = () => {
         token: ownerid,
         name: playname,
       }),
-    });
-    setcall(!booleancall);
-    console.log(booleancall);
+    }).then(() => setcall(!booleancall))
   };
 
   const wrap = {
