@@ -112,10 +112,6 @@ const Search = () => {
     search.artist = '';
     search.song = songPlayList;
     search.link = linkPlayList;
-    const s = i[0]
-    console.log(i[0])
-    console.log(currentSong)
-    console.log(search)
   }
 
 

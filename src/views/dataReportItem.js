@@ -1,19 +1,15 @@
 import React from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import useApi from '../customHooks/useApi'
 import '../styles/dataReport.css'
 
 const DataReportItem = () => {
   const location = useLocation()
   const { numberQuery, query, linkApi } = location.state
-  const history = useHistory()
   const data = useApi({
     link: linkApi,
     method: 'GET'
-  })
-
-  console.log(data, numberQuery)
-  
+  })  
 
   if (data.isLoading){
     return (

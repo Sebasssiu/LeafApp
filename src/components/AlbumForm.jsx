@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import SongElement from "./SongElement";
 import { UserContext } from "../App";
 import useApi from "../customHooks/useApi";
 import "../styles/inputPages.css";
-import { useHistory } from "react-router-dom";
 
 const AlbumForm = () => {
-  const history = useHistory();
   const [currentalbums, setcurrentalbums] = useState([]);
   const [currentalbumid, setcurrentalbumid] = useState(9);
   const [currentname, setcurrentname] = useState("");
@@ -49,14 +47,7 @@ const AlbumForm = () => {
           album: currentalbumid,
         }),
       });
-      /*
-      history.push({
-        pathname: "/albums",
-      });
-      */
       window.location.reload(false);
-      // aqui hay que setear el estado
-      //setcurrentalbums
       setcall(!booleancall);
     } else {
       alert("Ingresa todos los campos");
