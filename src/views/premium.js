@@ -114,8 +114,8 @@ const Premium = () => {
                                     onChange={handleInputChange}
                                 />
                             </form>
-                            <button onClick={payClick}>Pay ${price}</button>
                             {!missing ? <h1 className='missingData'>Por favor llenar todos los campos.</h1> : (null) }
+                            <button onClick={payClick}>Pay ${price}</button>
                         </div>
                     )
                 }   
