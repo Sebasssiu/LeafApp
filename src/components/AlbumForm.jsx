@@ -32,7 +32,7 @@ const AlbumForm = () => {
   });
 
   const sendData = (sname, gen, slink, sdate) => {
-    if (sname && gen && slink && sdate != "") {
+    if (sname && gen && slink && sdate !== "") {
       fetch("https://leaf-musicapp.herokuapp.com/songs/createsong/", {
         method: "POST",
         headers: {
@@ -46,9 +46,10 @@ const AlbumForm = () => {
           date: sdate,
           album: currentalbumid,
         }),
+      }).then(() => {
+        window.location.reload(false)
+        alert('Successfully added')
       });
-      window.location.reload(false);
-      setcall(!booleancall);
     } else {
       alert("Ingresa todos los campos");
     }
@@ -65,7 +66,7 @@ const AlbumForm = () => {
         token: ownerid,
         name: playname,
       }),
-    });
+    }).then(() => setcall(!booleancall))
   };
 
   const wrap = {
