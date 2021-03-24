@@ -30,7 +30,7 @@ const Item = () => {
   })
   const linkVerify = () => {
     if (item.link) setLink('songs/modifySong/')
-    if (item.is_staff) setLink('user/modifyUser/')
+    if (item.username) setLink('user/modifyUser/')
     if (item.release_date)setLink('albums/modifyAlbum/')
   }
   useEffect(() => {

@@ -1,16 +1,11 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import SongElement from "./SongElement";
 import { UserContext } from "../App";
 import useApi from "../customHooks/useApi";
 import "../styles/inputPages.css";
-import { Details } from "@material-ui/icons";
 
 const PlaylistForm = () => {
-  //const [plnames, setplnames] = useState([]);
-  //const [songinfo, setsonginfo] = useState([]);
-
   const [currentsongs, setcurrentsongs] = useState([]);
-  const [pname, setpname] = useState("");
   const token = useContext(UserContext);
   const [booleancall, setcall] = useState(false);
   const [emptylist, setemptylist] = useState(false);
@@ -66,7 +61,6 @@ const PlaylistForm = () => {
     padding: "15px",
     borderTop: "1px solid rgb(212, 212, 212, 1)",
     borderBottom: "1px solid rgb(212, 212, 212, 1)",
-    //borderBottom: "5px solid rgba(0, 0, 0, 0, 1)",
   };
   const content = {
     display: "flex",
@@ -106,7 +100,6 @@ const PlaylistForm = () => {
                 style={listitem}
                 onClick={() => {
                   if (detail.songs.length === 0) {
-                    console.log("vacio");
                     setcurrentsongs(detail.songs);
                     setemptylist(false);
                   } else {
@@ -125,9 +118,6 @@ const PlaylistForm = () => {
         </button>
       </div>
       <div className="maincontent" style={content}>
-        <h1 className="playlisttitle" style={sidetitle}>
-          {pname}
-        </h1>
         {emptylist === false ? (
           <h1 style={emptystyle}>
             Esta playlist está vacía, agrega canciones en el reproductor de

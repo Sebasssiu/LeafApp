@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import SongElement from "./SongElement";
 import { UserContext } from "../App";
 import useApi from "../customHooks/useApi";
 import "../styles/inputPages.css";
-import { useHistory } from "react-router-dom";
 
 const AlbumForm = () => {
-  const history = useHistory();
   const [currentalbums, setcurrentalbums] = useState([]);
   const [currentalbumid, setcurrentalbumid] = useState(9);
   const [currentname, setcurrentname] = useState("");
@@ -34,7 +32,7 @@ const AlbumForm = () => {
   });
 
   const sendData = (sname, gen, slink, sdate) => {
-    if (sname && gen && slink && sdate != "") {
+    if (sname && gen && slink && sdate !== "") {
       fetch("https://leaf-musicapp.herokuapp.com/songs/createsong/", {
         method: "POST",
         headers: {
@@ -48,16 +46,10 @@ const AlbumForm = () => {
           date: sdate,
           album: currentalbumid,
         }),
+      }).then(() => {
+        window.location.reload(false)
+        alert('Successfully added')
       });
-      /*
-      history.push({
-        pathname: "/albums",
-      });
-      */
-      window.location.reload(false);
-      // aqui hay que setear el estado
-      //setcurrentalbums
-      setcall(!booleancall);
     } else {
       alert("Ingresa todos los campos");
     }
@@ -74,8 +66,7 @@ const AlbumForm = () => {
         token: ownerid,
         name: playname,
       }),
-    });
-    setcall(!booleancall);
+    }).then(() => setcall(!booleancall))
   };
 
   const wrap = {

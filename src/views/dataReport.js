@@ -1,6 +1,5 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import useApi from "../customHooks/useApi";
 import '../styles/dataReport.css';
 
 const ReportData = () => {
