@@ -38,6 +38,7 @@ const PlaylistForm = () => {
       }),
     });
     setcall(!booleancall);
+    console.log(booleancall);
   };
 
   const wrap = {
