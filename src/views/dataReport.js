@@ -1,13 +1,9 @@
-import React, { useContext, useState, useEffect } from "react";
-import { UserContext } from "../App";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import useApi from "../customHooks/useApi";
 import '../styles/dataReport.css';
 
 const ReportData = () => {
-  const albumesUltimaSemana = useApi({
-    link:'recentalbums/'
-  })
   const history = useHistory()
 
 
