@@ -13,6 +13,7 @@ import AlbumForm from "./components/AlbumForm";
 import Item from './views/item'
 import ReportData from './views/dataReport'
 import DataReportItem from "./views/dataReportItem";
+import MonitorUpdate from './views/monitorUpdate' 
 
 
 export const UserContext = createContext();
@@ -61,6 +62,9 @@ const App = () => {
           </Route>
           <Route exact path='/dataReport/reportItem'>
             <DataReportItem />
+          </Route>
+          <Route exact path='/monitorUpdate'>
+            <MonitorUpdate />
           </Route>
         </Switch>
       </Router>

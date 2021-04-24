@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgb(3, 5, 12);
+  min-height: 100vh;
+}
+
+.loading {
+  width: 100px;
+  height: 100px;
+  background-image: url("https://www.ecostudioxv.com/assets/images/loader.gif");
+  background-size: cover;
+}
+
+.options-box {
+  display: flex;
+  flex-direction: row;
+}
+
+.check-box-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.option-description {
+  height: 30px;
+  font-size: larger;
+  margin: 0px;
+}
+
+.option-description-div {
+  height: 50px;
+  font-size: larger;
+  margin: 20px;
+}
