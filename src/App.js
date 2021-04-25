@@ -14,6 +14,7 @@ import Item from './views/item'
 import ReportData from './views/dataReport'
 import DataReportItem from "./views/dataReportItem";
 import MonitorUpdate from './views/monitorUpdate' 
+import MonitorOption1 from "./views/monitorOption1";
 
 
 export const UserContext = createContext();
@@ -65,6 +66,9 @@ const App = () => {
           </Route>
           <Route exact path='/monitorUpdate'>
             <MonitorUpdate />
+          </Route>
+          <Route exact path='/monitorOption1'>
+            <MonitorOption1 />
           </Route>
         </Switch>
       </Router>

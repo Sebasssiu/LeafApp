@@ -14,6 +14,16 @@
   background-size: cover;
 }
 
+.userSection{
+  display: flex;
+}
+
+.userListSelection{
+  margin: 20px;
+  height: 30px;
+  width: 200px;
+}
+
 .options-box {
   display: flex;
   flex-direction: row;
@@ -24,6 +34,11 @@
   flex-direction: column;
 }
 
+.check-update {
+  height: 20px !important;
+  width: 20px !important;
+}
+
 .option-description {
   height: 30px;
   font-size: larger;
@@ -31,7 +46,7 @@
 }
 
 .option-description-div {
-  height: 50px;
+  height: 40px;
   font-size: larger;
-  margin: 20px;
+  margin: 19px;
 }
