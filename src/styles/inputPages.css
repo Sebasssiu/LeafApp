@@ -74,3 +74,13 @@ button {
 .error {
   color: red;
 }
+
+.monitor-actions {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: repeat(2, auto);
+}
+
+.monitor-container {
+  margin-left: 5px;
+}

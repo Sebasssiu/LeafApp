@@ -5,7 +5,9 @@ import { useHistory } from 'react-router-dom'
 import '../styles/monitorUpdate.css'
 
 const MonitorUpdate = () => {
-  const [user, setUser] = useState('')
+  const [name, setName] = useState('')
+  const [data, setData] = useState({fetchedData: {}, isLoading: true})
+  const history = useHistory()
   const [optinoSelection, setOptionSelection] = useState({
     option_1: false,
     option_2: false,
@@ -24,6 +26,33 @@ const MonitorUpdate = () => {
   const onChange = (e) => {
     setOptionSelection({...optinoSelection, [e.target.name]: e.target.checked})
   }
+
+  const createMonitor = () => {
+    const body = {
+      name: name,
+      task_1: optinoSelection.option_1,
+      task_2: optinoSelection.option_2,
+      task_3: optinoSelection.option_3,
+      task_4: optinoSelection.option_4,
+      task_5: optinoSelection.option_5,
+      task_6: optinoSelection.option_6,
+      task_7: optinoSelection.option_7,
+      task_8: optinoSelection.option_8,
+    }
+    fetch(`https://leaf-musicapp.herokuapp.com/monitor/`,{
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+        .then(response => response.json())
+        .then(response => setData({fetchedData: response, isLoading: false}))
+        .catch(error => setData({...data, error: error}))
+    alert("Se ha creado un nuevo perfil.")
+    history.pop('/profile')
+  }
   
   if (userData.isLoading) {
     return (
@@ -36,21 +65,8 @@ const MonitorUpdate = () => {
   return (
     <div className="container">
       <h1>Make a user monitor</h1>
-      {console.log(userData)}
       <div className="userSection">
-        <select
-          className="userListSelection"
-          onChange={(e) => setUser(e.target.value)}
-        >
-          <option value="empty">Select a user</option>
-          {userData.fetchedData.map((detail, index) => {
-            return (
-              <option key={index.toString()} value={detail.id}>
-                {detail.username}
-              </option>
-            );
-          })}
-        </select>
+        <input placeholder="nombre del monitor" className="name-monitor" type="text" onChange={(e) => {setName(e.target.value)}}/>
       </div>
       <div className="options-box">
         <div className="check-box-container">
@@ -123,9 +139,7 @@ const MonitorUpdate = () => {
         </div>
       </div>
       <div className="button-update-monitor">
-        <button type="button" onClick={() => {
-          console.log(user, optinoSelection)
-        }}>Update</button> {/* Falta hacer el onclick para enviar la actualizacion a la base*/}
+        <button type="button" onClick={createMonitor}>Create Profile</button> 
       </div>
     </div>
   )

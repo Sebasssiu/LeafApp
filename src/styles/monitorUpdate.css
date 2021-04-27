@@ -16,6 +16,7 @@
 
 .userSection{
   display: flex;
+  flex-direction: row;
 }
 
 .userListSelection{
@@ -49,4 +50,14 @@
   height: 40px;
   font-size: larger;
   margin: 19px;
+}
+
+.ingrese-monitor{
+  font-size: larger;
+  margin: 0px !important;
+  margin-top: 10px;
+}
+
+.name-monitor {
+  height: 0.5px !important;
 }

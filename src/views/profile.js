@@ -29,6 +29,14 @@ const Profile = () => {
     method: 'POST',
     body: senData,
   })
+  const userMonitorData = useApi({
+    link: 'user/getMonitor/',
+    method: 'POST',
+    body:{
+      token: token.token,
+    }
+  })
+  console.log(userMonitorData)
   useEffect(() => {
     if (becomeArtist.fetchedData.response) { 
       alert('Ahora eres un artista!')
@@ -37,7 +45,7 @@ const Profile = () => {
     }
     if (data.fetchedData.length !== 0) setIsArtist(data.fetchedData.isArtist)
   }, [becomeArtist, data])
-  if (data.isLoading) {
+  if (data.isLoading || userMonitorData.isLoading) {
     return (
       <div className="container">
           <div className="loading"/>
@@ -47,6 +55,7 @@ const Profile = () => {
     return (
       <div className="container">
         <div className="userPhoto"/>
+        {console.log(data.fetchedData)}
         <div>
           <PersonIcon style={{ color: green[500], fontSize: 30}}/>
           <input 
@@ -98,8 +107,45 @@ const Profile = () => {
           <button onClick={ () => history.push('/modifySongs')}>Modify Data</button>
         ) : null}
         {data.fetchedData.isAdmin ? (
+          <button onClick={ () => history.push('/monitorUpdate')}>Monitor profile</button>
+        ) : null}
+        {data.fetchedData.isAdmin ? (
+          <button onClick={ () => history.push('/userMonitor')}>User monitor</button>
+        ) : null}
+        {data.fetchedData.isAdmin ? (
           <button onClick={ () => history.push('/dataReport')}>Data Report</button>
         ) : null}
+        {userMonitorData.fetchedData.name ?(
+          <div className="monitor-container">
+            <h1>{userMonitorData.fetchedData.name}</h1>
+          <div className="monitor-actions">
+            {userMonitorData.fetchedData.task_1 ? (
+              <button type="button" onClick={() => history.push('/monitorOption1')}>Modify song/album</button>
+            ) : null }
+            {userMonitorData.fetchedData.task_2 ? (
+              <button type="button" onClick={() => console.log('option2')}>Enable song/album</button>
+            ) : null }
+            {userMonitorData.fetchedData.task_3 ? (
+              <button type="button" onClick={() => console.log('option3')}>Deactivate unsuscribe users</button>
+            ) : null }
+            {userMonitorData.fetchedData.task_4 ? (
+              <button type="button" onClick={() => console.log('option4')}>Delete suscription</button>
+            ) : null }
+            {userMonitorData.fetchedData.task_5 ? (
+              <button type="button" onClick={() => console.log('option5')}>Deactivate artistist users</button>
+            ) : null }
+            {userMonitorData.fetchedData.task_6 ? (
+              <button type="button" onClick={() => history.push('/userMonitor')}>User monitor</button>
+            ) : null }
+            {userMonitorData.fetchedData.task_7 ? (
+              <button type="button" onClick={() => history.push('/dataReport')}>Data reports</button>
+            ) : null }
+            {userMonitorData.fetchedData.task_7 ? (
+              <button type="button" onClick={() => console.log('oprion8')}>Binnacle (Bitacora)</button>
+            ) : null }
+          </div>
+        </div>
+        ) : null }
       </div>
     )
   }
