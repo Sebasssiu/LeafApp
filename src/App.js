@@ -21,6 +21,8 @@ import MonitorOption2Modify from "./views/monitorOption2Modify";
 import MonitorOption2List from "./views/monitorOption2list";
 import MonitorOption3 from "./views/monitorOption3";
 import MonitorOption3Item from "./views/monitorOption3item";
+import MonitorOption4 from "./views/monitorOption4";
+import MonitorOption4Item from "./views/monitorOption4item";
 
 export const UserContext = createContext();
 const App = () => {
@@ -92,6 +94,12 @@ const App = () => {
           </Route>
           <Route exact path='/monitorOption3/Item'>
             <MonitorOption3Item />
+          </Route>
+          <Route exact path='/monitorOption4'>
+            <MonitorOption4 />
+          </Route>
+          <Route exact path='/monitorOption4/item'>
+            <MonitorOption4Item />
           </Route>
         </Switch>
       </Router>

@@ -129,7 +129,7 @@ const Profile = () => {
               <button type="button" onClick={() => history.push('/monitorOption3')}>Deactivate unsuscribe users</button>
             ) : null }
             {userMonitorData.fetchedData.task_4 ? (
-              <button type="button" onClick={() => console.log('option4')}>Delete suscription</button>
+              <button type="button" onClick={() => history.push('/monitorOption4')}>Delete suscription</button>
             ) : null }
             {userMonitorData.fetchedData.task_5 ? (
               <button type="button" onClick={() => console.log('option5')}>Deactivate artistist users</button>
