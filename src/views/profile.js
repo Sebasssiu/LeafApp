@@ -45,7 +45,7 @@ const Profile = () => {
     }
     if (data.fetchedData.length !== 0) setIsArtist(data.fetchedData.isArtist)
   }, [becomeArtist, data])
-  if (data.isLoading || userMonitorData.isLoading) {
+  if (data.isLoading) {
     return (
       <div className="container">
           <div className="loading"/>
@@ -123,10 +123,10 @@ const Profile = () => {
               <button type="button" onClick={() => history.push('/monitorOption1')}>Modify song/album</button>
             ) : null }
             {userMonitorData.fetchedData.task_2 ? (
-              <button type="button" onClick={() => console.log('option2')}>Enable song/album</button>
+              <button type="button" onClick={() => history.push('/monitorOption2')}>Enable song/album</button>
             ) : null }
             {userMonitorData.fetchedData.task_3 ? (
-              <button type="button" onClick={() => console.log('option3')}>Deactivate unsuscribe users</button>
+              <button type="button" onClick={() => history.push('/monitorOption3')}>Deactivate unsuscribe users</button>
             ) : null }
             {userMonitorData.fetchedData.task_4 ? (
               <button type="button" onClick={() => console.log('option4')}>Delete suscription</button>

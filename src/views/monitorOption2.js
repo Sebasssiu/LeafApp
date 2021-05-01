@@ -11,7 +11,7 @@ const MonitorOption2 = () => {
     <div className="container">
       <img src="/bitfinex-leaf.svg" alt="logo" className="logo" />
       <button onClick={() => history.push({
-        pathname: '/modifySongs/modify',
+        pathname: '/monitorOption2/list',
          state: {
            option: 'albums/'
          },  
@@ -20,7 +20,7 @@ const MonitorOption2 = () => {
         Modify Albums
       </button>
       <button onClick={() => history.push({
-        pathname: '/modifySongs/modify',
+        pathname: '/monitorOption2/list',
          state: {
            option: 'allSongs/'
          },  

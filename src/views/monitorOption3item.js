@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom"
 import useApi from '../customHooks/useApi'
 import { useHistory } from 'react-router-dom'
@@ -8,9 +8,9 @@ import EditIcon from '@material-ui/icons/Edit';
 import { green } from '@material-ui/core/colors';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
 
-const MonitorOption2Modify = () => {
+const MonitorOption3Item = () => {
   const location = useLocation()
-  const [link, setLink] = useState('')
+  const [link, setLink] = useState('user/modify_is_not_premium/')
   const item = location.state
   const [data, setData] = useState({
     name: item.name ? item.name : item.artist_name,
@@ -29,13 +29,23 @@ const MonitorOption2Modify = () => {
     },
   })
   const linkVerify = () => {
-    if (item.link) setLink('songs/modifySong/')
-    if (item.username) setLink('user/modifyUser/')
-    if (item.release_date)setLink('albums/modifyAlbum/')
+    const body = {
+      data,
+      item,
+    }
+    fetch(`https://leaf-musicapp.herokuapp.com/user/modify_is_not_premium/`,{
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+        .then(response => response.json())
+        .then(response => setData({fetchedData: response, isLoading: false}))
+        .catch(error => setData({...data, error: error}))
+    if (updateData.fetchedData.response) history.push('/profile')
   }
-  useEffect(() => {
-    if (updateData.fetchedData.response) history.push('/monitorOption2')
-  }, [updateData])
   return (
     <div className="container">
       {Object.keys(item).map((variant) => {
@@ -49,11 +59,6 @@ const MonitorOption2Modify = () => {
                 readOnly
                 value = {data.name}
                 placeholder={item[variant]}
-                onChange = {e => setData({
-                  ...data,
-                  name: e.target.value,
-                  isModify: true,
-                })}
               />
               <div className="column">
                 <NotInterestedIcon style={{ color: green[500], fontSize: 30}}/>
@@ -88,14 +93,8 @@ const MonitorOption2Modify = () => {
               <input
                 className="column"
                 type="text"
-                readOnly
                 value = {data.link}
                 placeholder={item[variant]}
-                onChange = {e => setData({
-                  ...data,
-                  link: e.target.value,
-                  isModify: true,
-                })}
               />
               <div className="column">
                 <NotInterestedIcon style={{ color: green[500], fontSize: 30}}/>
@@ -126,4 +125,4 @@ const MonitorOption2Modify = () => {
   )
 }
 
-export default MonitorOption2Modify
+export default MonitorOption3Item
