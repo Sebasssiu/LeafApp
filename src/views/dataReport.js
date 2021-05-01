@@ -76,6 +76,17 @@ const ReportData = () => {
         >
           Usuarios más activos en la plataforma        {">"}
         </li>
+        <li className='queriesTitle' onClick={() => history.push({
+          pathname: '/dataReport/reportItem',
+          state: {
+            numberQuery: '7',
+            query: 'Pago a artistas:',
+            linkApi: 'listen/pay/'
+          }
+        })}
+        >
+          Pago a artistas                  {">"}
+        </li>
       </ol>
     </div>
   )

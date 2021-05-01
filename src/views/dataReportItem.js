@@ -102,6 +102,16 @@ const DataReportItem = () => {
       </div>
     )
   }
+  if (numberQuery === '7') {
+    return (
+      <div className='container' >
+        <h1>{query}</h1>
+        <div className='dataobtenida'>
+          payment         
+        </div>
+      </div>
+    )
+  }
   return (
     <div className='container' >
       <h1>Lamentablemente ocurrio un error con el dato que buscas, se hara la consulta para el siguiente reporte</h1>
