@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { UserContext } from '../App'
 import { useHistory } from 'react-router-dom'
 import useApi from '../customHooks/useApi'
 import '../styles/userMonitor.css'
 
 const UserMonitor = () => {
+  const context = useContext(UserContext)
   const history = useHistory()
   const [user, setUser] = useState('')
   const [monitor, setMonitor] = useState('')
@@ -23,6 +24,7 @@ const UserMonitor = () => {
     const body = {
       user_id: user,
       monitor_id: monitor,
+      modified_id: context.user_id
     }
     fetch(`https://leaf-musicapp.herokuapp.com/user/createmonitor/`,{
             method: 'POST',

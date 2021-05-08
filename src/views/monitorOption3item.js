@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from "react-router-dom"
 import useApi from '../customHooks/useApi'
 import { useHistory } from 'react-router-dom'
@@ -7,8 +7,10 @@ import '../styles/songCard.css'
 import EditIcon from '@material-ui/icons/Edit';
 import { green } from '@material-ui/core/colors';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
+import { UserContext } from '../App' 
 
 const MonitorOption3Item = () => {
+  const token = useContext(UserContext)
   const location = useLocation()
   const [link, setLink] = useState('user/modify_is_not_premium/')
   const item = location.state
@@ -26,12 +28,14 @@ const MonitorOption3Item = () => {
     body: {
       data,
       item,
+      modified_id: token.user_id
     },
   })
   const linkVerify = () => {
     const body = {
       data,
       item,
+      modified_id: token.user_id
     }
     fetch(`https://leaf-musicapp.herokuapp.com/user/modify_is_not_premium/`,{
             method: 'POST',

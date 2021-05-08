@@ -10,7 +10,7 @@ const MonitorOption3 = () => {
   const history = useHistory()
   const data = useApi({
     link: 'user/modify_is_not_premium/',
-    method: 'GET'
+    method: 'GET',
   })
 
   if (data.isLoading) {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from "react-router-dom"
 import useApi from '../customHooks/useApi'
 import { useHistory } from 'react-router-dom'
@@ -7,8 +7,10 @@ import '../styles/songCard.css'
 import EditIcon from '@material-ui/icons/Edit';
 import { green } from '@material-ui/core/colors';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
+import { UserContext } from '../App';
 
 const MonitorOption4Item = () => {
+  const context = useContext(UserContext)
   const location = useLocation()
   const [link, setLink] = useState('user/deactivate_premium/')
   const item = location.state
@@ -26,12 +28,14 @@ const MonitorOption4Item = () => {
     body: {
       data,
       item,
+      modified_id: context.user_id
     },
   })
   const linkVerify = () => {
     const body = {
       item,
       data,
+      modified_id: context.user_id
     }
     console.log(body)
     fetch(`https://leaf-musicapp.herokuapp.com/user/deactivate_premium/`,{

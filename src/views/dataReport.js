@@ -80,12 +80,49 @@ const ReportData = () => {
           pathname: '/dataReport/reportItem',
           state: {
             numberQuery: '7',
-            query: 'Pago a artistas:',
-            linkApi: 'listen/pay/'
+            query: 'Total reproducciones por semana dado un rango de fechas:',
+            linkApi: 'listen/mostactive/',
+            linkApiPost: 'listen/weeklyListen/'
           }
         })}
         >
-          Pago a artistas                  {">"}
+          Reproducciones por semana dado un rango de fechas                  {">"}
+        </li>
+        <li className='queriesTitle' onClick={() => history.push({
+          pathname: '/dataReport/reportItem',
+          state: {
+            numberQuery: '8',
+            query: 'Los N artistas con las mayores reproducciones para un rango de fechas:',
+            linkApi: 'listen/mostactive/',
+            linkApiPost: 'listen/weeklyArtistPlays/'
+          }
+        })}
+        >
+          Artistas con mayores reproducciones para un rango de fechas                 {">"}
+        </li>
+        <li className='queriesTitle' onClick={() => history.push({
+          pathname: '/dataReport/reportItem',
+          state: {
+            numberQuery: '9',
+            query: 'Total de reproducciones por género para un rango de fechas:',
+            linkApi: 'listen/mostactive/',
+            linkApiPost: 'listen/genreListen/'
+          }
+        })}
+        >
+        Total de reproducciones por género para un rango de fechas                 {">"}
+        </li>
+        <li className='queriesTitle' onClick={() => history.push({
+          pathname: '/dataReport/reportItem',
+          state: {
+            numberQuery: '10',
+            query: 'Las N canciones con más reproducciones para un artista:',
+            linkApi: 'listen/mostactive/',
+            linkApiPost: 'listen/topArtistSong/'
+          }
+        })}
+        >
+        Las N canciones con más reproducciones para un artista                 {">"}
         </li>
       </ol>
     </div>

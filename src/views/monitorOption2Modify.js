@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useLocation } from "react-router-dom"
 import useApi from '../customHooks/useApi'
 import { useHistory } from 'react-router-dom'
@@ -7,8 +7,10 @@ import '../styles/songCard.css'
 import EditIcon from '@material-ui/icons/Edit';
 import { green } from '@material-ui/core/colors';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
+import { UserContext } from '../App'
 
 const MonitorOption2Modify = () => {
+  const context = useContext(UserContext)
   const location = useLocation()
   const [link, setLink] = useState('')
   const item = location.state
@@ -26,6 +28,7 @@ const MonitorOption2Modify = () => {
     body: {
       data,
       item,
+      modified_id: context.user_id
     },
   })
   const linkVerify = () => {

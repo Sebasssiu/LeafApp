@@ -1,15 +1,86 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import useApi from '../customHooks/useApi'
 import '../styles/dataReport.css'
 
 const DataReportItem = () => {
   const location = useLocation()
-  const { numberQuery, query, linkApi } = location.state
+  const { numberQuery, query, linkApi, linkApiPost } = location.state
+  const [dataDates, setDataDates] = useState({fetchedData: {}, isLoading: true})
+  const [dates, setDates] = useState({
+    date1: '2021-03-01',
+    date2: '2021-05-01',
+    limit: 1,
+    name: 'avicii'
+  })
   const data = useApi({
     link: linkApi,
     method: 'GET'
   })
+  const prueba = useApi({
+    link:'listen/weeklyListen/',
+    method: 'POST',
+    body: {
+      date1: dates.date1,
+      date2: dates.date2
+    }
+  })
+  console.log(prueba)
+  const QueryDates = () => {
+    const body = {
+      date1: dates.date1,
+      date2: dates.date2
+    }
+    fetch(`https://leaf-musicapp.herokuapp.com/${linkApiPost}`,{
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body) 
+        })
+        .then(response => response.json())
+        .then(response => setDataDates({fetchedData: response, isLoading: false}))
+        .catch(error => setDataDates({...dataDates, error: error}))
+  }
+  const QueryDatesLimit = () => {
+    const body = {
+      date1: dates.date1,
+      date2: dates.date2,
+      limit: dates.limit
+    }
+    fetch(`https://leaf-musicapp.herokuapp.com/${linkApiPost}`,{
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body) 
+        })
+        .then(response => response.json())
+        .then(response => setDataDates({fetchedData: response, isLoading: false}))
+        .catch(error => setDataDates({...dataDates, error: error}))
+  }
+  const QueryName = () => {
+    const body = {
+      name: dates.name
+    }
+    fetch(`https://leaf-musicapp.herokuapp.com/${linkApiPost}`,{
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body) 
+        })
+        .then(response => response.json())
+        .then(response => setDataDates({fetchedData: response, isLoading: false}))
+        .catch(error => setDataDates({...dataDates, error: error}))
+  }
+
+  const onChange = (e) => {
+    setDates({...dates, [e.target.name]: e.target.value})
+  }
 
   if (data.isLoading){
     return (
@@ -106,9 +177,127 @@ const DataReportItem = () => {
     return (
       <div className='container' >
         <h1>{query}</h1>
-        <div className='dataobtenida'>
-          payment         
+        <h3>Ingrese la fecha en formato: YYYY-MM-DD</h3>
+        <div className='datesContainer'>
+          <input 
+            type="date"
+            name="date1"
+            value="2021-03-01"
+            onChange={onChange}
+          />
+          <input 
+            type="date"
+            name="date2"
+            value="2021-05-01"
+            onChange={onChange}
+          />
+          <button onClick={QueryDates}>Search</button>
         </div>
+        {!dataDates.isLoading ? (
+          <div className='dataobtenida'>
+            {console.log(dataDates.fetchedData)}
+            {Object.keys(dataDates.fetchedData).map((keyname, item) => {
+              return (
+                <h3>{keyname} con un total de: {item}</h3>
+              )
+            })}         
+          </div>
+        ) : null}
+      </div>
+    )
+  }
+  if (numberQuery === '8') {
+    return (
+      <div className="container">
+        <h1>{query}</h1>
+        <div className='datesContainer'>
+          <input 
+            type="date"
+            name="date1"
+            value="2021-03-01"
+            onChange={onChange}
+          />
+          <input 
+            type="date"
+            name="date2"
+            value="2021-05-01"
+            onChange={onChange}
+          />
+          <input
+            type="number"
+            min="1"
+            name="limit"
+            onChange={onChange}
+          />
+          <button onClick={QueryDatesLimit}>Search</button>
+        </div>
+        {!dataDates.isLoading ? (
+          <div className="dataobtenida">
+            {console.log(dataDates.fetchedData)}
+            {Object.keys(dataDates.fetchedData).map((keyname, item) => {
+              return (
+                <h3>{keyname} con un total de reproducciones: {dataDates.fetchedData[keyname]}</h3>
+              )
+            })}
+          </div>
+        ) : null}
+      </div>
+    )
+  }
+  if (numberQuery === '9') {
+    return (
+      <div className="container">
+        <h1>{query}</h1>
+        <div className="datacontainer">
+          <input 
+            type="date"
+            name="date1"
+            value="2021-03-01"
+            onChange={onChange}
+          />
+          <input 
+            type="date"
+            name="date2"
+            value="2021-05-01"
+            onChange={onChange}
+          />
+          <button onClick={QueryDates}>Search</button>
+        </div>
+        {!dataDates.isLoading ? (
+          <div className='dataobtenida'>
+            {console.log(dataDates.fetchedData)}
+            {Object.keys(dataDates.fetchedData).map((keyname, item) => {
+              return (
+                <h3>{keyname} con un total de: {dataDates.fetchedData[keyname]}</h3>
+              )
+            })}         
+          </div>
+        ) : null}
+      </div>
+    )
+  }
+  if (numberQuery === '10') {
+    return (
+      <div className="container">
+        <h1>{query}</h1>
+        <div className="datacontainer">
+          <input
+            type="text"
+            name="name"
+            onChange={onChange}
+          />
+          <button onClick={QueryName}>Search</button>
+        </div>
+        {!dataDates.isLoading ? (
+          <div className="dataobtenida">
+            {console.log(dataDates.fetchedData)}
+            {Object.keys(dataDates.fetchedData).map((key => {
+              return (
+                <h3>{key} con un total de reproducciones: {dataDates.fetchedData[key]}</h3>
+              )
+            }))}
+          </div>
+        ): null}
       </div>
     )
   }

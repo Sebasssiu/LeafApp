@@ -36,7 +36,14 @@ const Profile = () => {
       token: token.token,
     }
   })
-  console.log(userMonitorData)
+  
+  const payment = useApi({
+    link: 'listen/pay/',
+    method: 'POST',
+    body: {
+      token: token.token,
+    }
+  })
   useEffect(() => {
     if (becomeArtist.fetchedData.response) { 
       alert('Ahora eres un artista!')
@@ -55,7 +62,11 @@ const Profile = () => {
     return (
       <div className="container">
         <div className="userPhoto"/>
-        {console.log(data.fetchedData)}
+        {data.fetchedData.isArtist && !payment.fetchedData.isLoading ? (
+          <div>
+            <h3> Cantidad de dinero generado por sus canciones: $ {payment.fetchedData.pay}</h3>
+          </div>
+        ): null}
         <div>
           <PersonIcon style={{ color: green[500], fontSize: 30}}/>
           <input 
@@ -141,7 +152,7 @@ const Profile = () => {
               <button type="button" onClick={() => history.push('/dataReport')}>Data reports</button>
             ) : null }
             {userMonitorData.fetchedData.task_7 ? (
-              <button type="button" onClick={() => console.log('oprion8')}>Binnacle (Bitacora)</button>
+              <button type="button" onClick={() => history.push('/binnacle')}>Binnacle (Bitacora)</button>
             ) : null }
           </div>
         </div>

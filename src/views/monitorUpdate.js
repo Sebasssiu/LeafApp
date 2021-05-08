@@ -1,10 +1,11 @@
-import React, { useState} from 'react'
+import React, { useState, useContext } from 'react'
 import useApi from '../customHooks/useApi'
 import { UserContext } from '../App'
 import { useHistory } from 'react-router-dom'
 import '../styles/monitorUpdate.css'
 
 const MonitorUpdate = () => {
+  const context = useContext(UserContext)
   const [name, setName] = useState('')
   const [data, setData] = useState({fetchedData: {}, isLoading: true})
   const history = useHistory()

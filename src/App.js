@@ -25,6 +25,7 @@ import MonitorOption4 from "./views/monitorOption4";
 import MonitorOption4Item from "./views/monitorOption4item";
 import MonitorOption5 from "./views/monitorOption5";
 import MonitorOption5Item from "./views/monitorOption5Item";
+import Binnacle from './views/binnacle'
 
 export const UserContext = createContext();
 const App = () => {
@@ -108,6 +109,9 @@ const App = () => {
           </Route>
           <Route exact path='/monitorOption5/item'>
             <MonitorOption5Item />
+          </Route>
+          <Route exact path='/binnacle'>
+            <Binnacle />
           </Route>
         </Switch>
       </Router>
