@@ -59,7 +59,6 @@ const MonitorUpdate = () => {
     return (
       <div className="container">
         <div className="loading"/>
-        {console.log(userData)}
       </div>
     )
   }

@@ -31,7 +31,6 @@ const Item = () => {
       modified_id: context.user_id
     },
   })
-  console.log(context.user_id)
   const linkVerify = () => {
     if (item.link) setLink('songs/modifySong/')
     if (item.username) setLink('user/modifyUser/')

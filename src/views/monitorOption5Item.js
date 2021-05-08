@@ -37,7 +37,6 @@ const MonitorOption5Item = () => {
       data,
       modified_id: context.user_id
     }
-    console.log(body)
     fetch(`https://leaf-musicapp.herokuapp.com/user/deactivate_artist/`,{
             method: 'POST',
             mode: 'cors',

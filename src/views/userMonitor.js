@@ -20,7 +20,6 @@ const UserMonitor = () => {
   })
 
   const makeMonitor = () => {
-    console.log(user, monitor)
     const body = {
       user_id: user,
       monitor_id: monitor,
@@ -45,7 +44,6 @@ const UserMonitor = () => {
     return (
       <div className="container">
         <div className="loading"/>
-        {console.log(userData)}
       </div>
     )
   }

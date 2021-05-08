@@ -23,7 +23,6 @@ const MonitorOption4 = () => {
   return(
     <div className="container">
       <ul>
-      {console.log(data)}
         {data.fetchedData.map(item => {
             return(
               <li id={item.id} className="h1" onClick={() => {

@@ -25,7 +25,6 @@ const DataReportItem = () => {
       date2: dates.date2
     }
   })
-  console.log(prueba)
   const QueryDates = () => {
     const body = {
       date1: dates.date1,
@@ -195,7 +194,6 @@ const DataReportItem = () => {
         </div>
         {!dataDates.isLoading ? (
           <div className='dataobtenida'>
-            {console.log(dataDates.fetchedData)}
             {Object.keys(dataDates.fetchedData).map((keyname, item) => {
               return (
                 <h3>{keyname} con un total de: {item}</h3>
@@ -233,7 +231,6 @@ const DataReportItem = () => {
         </div>
         {!dataDates.isLoading ? (
           <div className="dataobtenida">
-            {console.log(dataDates.fetchedData)}
             {Object.keys(dataDates.fetchedData).map((keyname, item) => {
               return (
                 <h3>{keyname} con un total de reproducciones: {dataDates.fetchedData[keyname]}</h3>
@@ -265,7 +262,6 @@ const DataReportItem = () => {
         </div>
         {!dataDates.isLoading ? (
           <div className='dataobtenida'>
-            {console.log(dataDates.fetchedData)}
             {Object.keys(dataDates.fetchedData).map((keyname, item) => {
               return (
                 <h3>{keyname} con un total de: {dataDates.fetchedData[keyname]}</h3>
@@ -290,7 +286,6 @@ const DataReportItem = () => {
         </div>
         {!dataDates.isLoading ? (
           <div className="dataobtenida">
-            {console.log(dataDates.fetchedData)}
             {Object.keys(dataDates.fetchedData).map((key => {
               return (
                 <h3>{key} con un total de reproducciones: {dataDates.fetchedData[key]}</h3>

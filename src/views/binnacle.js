@@ -6,7 +6,6 @@ const Binnacle = () => {
     link: 'history/',
     method: 'GET'
   })
-  console.log(data)
 
   if (data.isLoading){
     return (
