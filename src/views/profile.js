@@ -29,6 +29,21 @@ const Profile = () => {
     method: 'POST',
     body: senData,
   })
+  const userMonitorData = useApi({
+    link: 'user/getMonitor/',
+    method: 'POST',
+    body:{
+      token: token.token,
+    }
+  })
+  
+  const payment = useApi({
+    link: 'listen/pay/',
+    method: 'POST',
+    body: {
+      token: token.token,
+    }
+  })
   useEffect(() => {
     if (becomeArtist.fetchedData.response) { 
       alert('Ahora eres un artista!')
@@ -47,6 +62,11 @@ const Profile = () => {
     return (
       <div className="container">
         <div className="userPhoto"/>
+        {data.fetchedData.isArtist && !payment.fetchedData.isLoading ? (
+          <div>
+            <h3> Cantidad de dinero generado por sus canciones: $ {payment.fetchedData.pay}</h3>
+          </div>
+        ): null}
         <div>
           <PersonIcon style={{ color: green[500], fontSize: 30}}/>
           <input 
@@ -98,8 +118,45 @@ const Profile = () => {
           <button onClick={ () => history.push('/modifySongs')}>Modify Data</button>
         ) : null}
         {data.fetchedData.isAdmin ? (
+          <button onClick={ () => history.push('/monitorUpdate')}>Monitor profile</button>
+        ) : null}
+        {data.fetchedData.isAdmin ? (
+          <button onClick={ () => history.push('/userMonitor')}>User monitor</button>
+        ) : null}
+        {data.fetchedData.isAdmin ? (
           <button onClick={ () => history.push('/dataReport')}>Data Report</button>
         ) : null}
+        {userMonitorData.fetchedData.name ?(
+          <div className="monitor-container">
+            <h1>{userMonitorData.fetchedData.name}</h1>
+          <div className="monitor-actions">
+            {userMonitorData.fetchedData.task_1 ? (
+              <button type="button" onClick={() => history.push('/monitorOption1')}>Modify song/album</button>
+            ) : null }
+            {userMonitorData.fetchedData.task_2 ? (
+              <button type="button" onClick={() => history.push('/monitorOption2')}>Enable song/album</button>
+            ) : null }
+            {userMonitorData.fetchedData.task_3 ? (
+              <button type="button" onClick={() => history.push('/monitorOption3')}>Deactivate unsuscribe users</button>
+            ) : null }
+            {userMonitorData.fetchedData.task_4 ? (
+              <button type="button" onClick={() => history.push('/monitorOption4')}>Delete suscription</button>
+            ) : null }
+            {userMonitorData.fetchedData.task_5 ? (
+              <button type="button" onClick={() => history.push('/monitorOption5')}>Deactivate artistist users</button>
+            ) : null } {/*listo */}
+            {userMonitorData.fetchedData.task_6 ? (
+              <button type="button" onClick={() => history.push('/userMonitor')}>User monitor</button>
+            ) : null }
+            {userMonitorData.fetchedData.task_7 ? (
+              <button type="button" onClick={() => history.push('/dataReport')}>Data reports</button>
+            ) : null }
+            {userMonitorData.fetchedData.task_7 ? (
+              <button type="button" onClick={() => history.push('/binnacle')}>Binnacle (Bitacora)</button>
+            ) : null }
+          </div>
+        </div>
+        ) : null }
       </div>
     )
   }

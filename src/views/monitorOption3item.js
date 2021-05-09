@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from "react-router-dom"
 import useApi from '../customHooks/useApi'
 import { useHistory } from 'react-router-dom'
@@ -7,12 +7,12 @@ import '../styles/songCard.css'
 import EditIcon from '@material-ui/icons/Edit';
 import { green } from '@material-ui/core/colors';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
-import { UserContext } from '../App'
+import { UserContext } from '../App' 
 
-const Item = () => {
-  const context = useContext(UserContext)
+const MonitorOption3Item = () => {
+  const token = useContext(UserContext)
   const location = useLocation()
-  const [link, setLink] = useState('')
+  const [link, setLink] = useState('user/modify_is_not_premium/')
   const item = location.state
   const [data, setData] = useState({
     name: item.name ? item.name : item.artist_name,
@@ -28,17 +28,28 @@ const Item = () => {
     body: {
       data,
       item,
-      modified_id: context.user_id
+      modified_id: token.user_id
     },
   })
   const linkVerify = () => {
-    if (item.link) setLink('songs/modifySong/')
-    if (item.username) setLink('user/modifyUser/')
-    if (item.release_date)setLink('albums/modifyAlbum/')
+    const body = {
+      data,
+      item,
+      modified_id: token.user_id
+    }
+    fetch(`https://leaf-musicapp.herokuapp.com/user/modify_is_not_premium/`,{
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        })
+        .then(response => response.json())
+        .then(response => setData({fetchedData: response, isLoading: false}))
+        .catch(error => setData({...data, error: error}))
+    if (updateData.fetchedData.response) history.push('/profile')
   }
-  useEffect(() => {
-    if (updateData.fetchedData.response) history.push('/modifySongs')
-  }, [updateData])
   return (
     <div className="container">
       {Object.keys(item).map((variant) => {
@@ -49,16 +60,12 @@ const Item = () => {
               <input
                 className="column"
                 type="text"
+                readOnly
                 value = {data.name}
                 placeholder={item[variant]}
-                onChange = {e => setData({
-                  ...data,
-                  name: e.target.value,
-                  isModify: true,
-                })}
               />
               <div className="column">
-                <EditIcon style={{ color: green[500], fontSize: 30}}/>
+                <NotInterestedIcon style={{ color: green[500], fontSize: 30}}/>
               </div>
             </div>
           )
@@ -92,14 +99,9 @@ const Item = () => {
                 type="text"
                 value = {data.link}
                 placeholder={item[variant]}
-                onChange = {e => setData({
-                  ...data,
-                  link: e.target.value,
-                  isModify: true,
-                })}
               />
               <div className="column">
-                <EditIcon style={{ color: green[500], fontSize: 30}}/>
+                <NotInterestedIcon style={{ color: green[500], fontSize: 30}}/>
               </div>
             </div>
           )
@@ -123,14 +125,8 @@ const Item = () => {
       {data.isModify ? (
         <button onClick={linkVerify}>Save changes</button>
       ) : null}
-      <button onClick={() => {
-        setData({
-          ...data,
-          delete: true,
-        })
-        linkVerify()
-      }}>Delete</button>
     </div>
   )
 }
-export default Item
+
+export default MonitorOption3Item

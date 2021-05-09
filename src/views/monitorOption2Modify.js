@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useLocation } from "react-router-dom"
 import useApi from '../customHooks/useApi'
 import { useHistory } from 'react-router-dom'
@@ -9,7 +9,7 @@ import { green } from '@material-ui/core/colors';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
 import { UserContext } from '../App'
 
-const Item = () => {
+const MonitorOption2Modify = () => {
   const context = useContext(UserContext)
   const location = useLocation()
   const [link, setLink] = useState('')
@@ -37,7 +37,7 @@ const Item = () => {
     if (item.release_date)setLink('albums/modifyAlbum/')
   }
   useEffect(() => {
-    if (updateData.fetchedData.response) history.push('/modifySongs')
+    if (updateData.fetchedData.response) history.push('/monitorOption2')
   }, [updateData])
   return (
     <div className="container">
@@ -49,6 +49,7 @@ const Item = () => {
               <input
                 className="column"
                 type="text"
+                readOnly
                 value = {data.name}
                 placeholder={item[variant]}
                 onChange = {e => setData({
@@ -58,7 +59,7 @@ const Item = () => {
                 })}
               />
               <div className="column">
-                <EditIcon style={{ color: green[500], fontSize: 30}}/>
+                <NotInterestedIcon style={{ color: green[500], fontSize: 30}}/>
               </div>
             </div>
           )
@@ -90,6 +91,7 @@ const Item = () => {
               <input
                 className="column"
                 type="text"
+                readOnly
                 value = {data.link}
                 placeholder={item[variant]}
                 onChange = {e => setData({
@@ -99,7 +101,7 @@ const Item = () => {
                 })}
               />
               <div className="column">
-                <EditIcon style={{ color: green[500], fontSize: 30}}/>
+                <NotInterestedIcon style={{ color: green[500], fontSize: 30}}/>
               </div>
             </div>
           )
@@ -123,14 +125,8 @@ const Item = () => {
       {data.isModify ? (
         <button onClick={linkVerify}>Save changes</button>
       ) : null}
-      <button onClick={() => {
-        setData({
-          ...data,
-          delete: true,
-        })
-        linkVerify()
-      }}>Delete</button>
     </div>
   )
 }
-export default Item
+
+export default MonitorOption2Modify

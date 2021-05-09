@@ -13,7 +13,19 @@ import AlbumForm from "./components/AlbumForm";
 import Item from './views/item'
 import ReportData from './views/dataReport'
 import DataReportItem from "./views/dataReportItem";
-
+import MonitorUpdate from './views/monitorUpdate' 
+import MonitorOption1 from "./views/monitorOption1";
+import UserMonitor from "./views/userMonitor";
+import MonitorOption2 from "./views/monitorOption2";
+import MonitorOption2Modify from "./views/monitorOption2Modify";
+import MonitorOption2List from "./views/monitorOption2list";
+import MonitorOption3 from "./views/monitorOption3";
+import MonitorOption3Item from "./views/monitorOption3item";
+import MonitorOption4 from "./views/monitorOption4";
+import MonitorOption4Item from "./views/monitorOption4item";
+import MonitorOption5 from "./views/monitorOption5";
+import MonitorOption5Item from "./views/monitorOption5Item";
+import Binnacle from './views/binnacle'
 
 export const UserContext = createContext();
 const App = () => {
@@ -61,6 +73,45 @@ const App = () => {
           </Route>
           <Route exact path='/dataReport/reportItem'>
             <DataReportItem />
+          </Route>
+          <Route exact path='/monitorUpdate'>
+            <MonitorUpdate />
+          </Route>
+          <Route exact path='/userMonitor'>
+            <UserMonitor />
+          </Route>
+          <Route exact path='/monitorOption1'>
+            <MonitorOption1 />
+          </Route>
+          <Route exact path='/monitorOption2'>
+            <MonitorOption2 />
+          </Route>
+          <Route exact path='/monitorOption2/list'>
+            <MonitorOption2List />
+          </Route>
+          <Route exact path='/monitorOption2/modify'>
+            <MonitorOption2Modify />
+          </Route>
+          <Route exact path='/monitorOption3'>
+            <MonitorOption3 />
+          </Route>
+          <Route exact path='/monitorOption3/Item'>
+            <MonitorOption3Item />
+          </Route>
+          <Route exact path='/monitorOption4'>
+            <MonitorOption4 />
+          </Route>
+          <Route exact path='/monitorOption4/tem'>
+            <MonitorOption4Item />
+          </Route>
+          <Route exact path='/monitorOption5'>
+            <MonitorOption5 />
+          </Route>
+          <Route exact path='/monitorOption5/item'>
+            <MonitorOption5Item />
+          </Route>
+          <Route exact path='/binnacle'>
+            <Binnacle />
           </Route>
         </Switch>
       </Router>
