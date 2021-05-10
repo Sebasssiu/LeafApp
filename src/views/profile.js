@@ -126,6 +126,9 @@ const Profile = () => {
         {data.fetchedData.isAdmin ? (
           <button onClick={ () => history.push('/dataReport')}>Data Report</button>
         ) : null}
+        {data.fetchedData.isAdmin ? (
+          <button type="button" onClick={() => history.push('/binnacle')}>Binnacle (Bitacora)</button>
+        ) : null }
         {userMonitorData.fetchedData.name ?(
           <div className="monitor-container">
             <h1>{userMonitorData.fetchedData.name}</h1>
@@ -144,7 +147,7 @@ const Profile = () => {
             ) : null }
             {userMonitorData.fetchedData.task_5 ? (
               <button type="button" onClick={() => history.push('/monitorOption5')}>Deactivate artistist users</button>
-            ) : null } {/*listo */}
+            ) : null }
             {userMonitorData.fetchedData.task_6 ? (
               <button type="button" onClick={() => history.push('/userMonitor')}>User monitor</button>
             ) : null }
