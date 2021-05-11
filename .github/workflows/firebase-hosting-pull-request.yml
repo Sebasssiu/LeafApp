@@ -16,4 +16,4 @@ jobs:
           projectId: leaf-musicapp
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
-          CI: False
+          CI: false
