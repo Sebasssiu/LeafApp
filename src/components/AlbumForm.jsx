@@ -23,6 +23,7 @@ const AlbumForm = () => {
     method: "POST",
     body: {
       token: ownerid,
+      modified_id: token.user_id
     },
   });
 
