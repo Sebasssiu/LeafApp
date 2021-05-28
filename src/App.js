@@ -26,6 +26,9 @@ import MonitorOption4Item from "./views/monitorOption4item";
 import MonitorOption5 from "./views/monitorOption5";
 import MonitorOption5Item from "./views/monitorOption5Item";
 import Binnacle from './views/binnacle'
+import Simulation from './views/simulation.js'
+import SimultaionSong from "./views/simulationSong";
+import SimulationListen from "./views/simulationListen";
 
 export const UserContext = createContext();
 const App = () => {
@@ -112,6 +115,15 @@ const App = () => {
           </Route>
           <Route exact path='/binnacle'>
             <Binnacle />
+          </Route>
+          <Route exact path='/simulation'>
+            <Simulation />
+          </Route>
+          <Route exact path='/simulationSong'>
+            <SimultaionSong />
+          </Route>
+          <Route exact path='/simulationListen'>
+            <SimulationListen />
           </Route>
         </Switch>
       </Router>

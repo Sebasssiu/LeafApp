@@ -129,6 +129,9 @@ const Profile = () => {
         {data.fetchedData.isAdmin ? (
           <button type="button" onClick={() => history.push('/binnacle')}>Binnacle (Bitacora)</button>
         ) : null }
+        {data.fetchedData.isAdmin ? (
+          <button type="button" onClick={() => history.push('/simulation')}>Simulation Opt</button>
+        ) : null }
         {userMonitorData.fetchedData.name ?(
           <div className="monitor-container">
             <h1>{userMonitorData.fetchedData.name}</h1>
