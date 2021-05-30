@@ -132,6 +132,12 @@ const Profile = () => {
         {data.fetchedData.isAdmin ? (
           <button type="button" onClick={() => history.push('/simulation')}>Simulation Opt</button>
         ) : null }
+        {data.fetchedData.isAdmin ? (
+          <button type="button" onClick={() => history.push('/mongoInsta')}>Mongo Instance</button>
+        ) : null }
+        {data.fetchedData.isAdmin ? (
+          <button type="button" onClick={() => history.push('/recomendations')}>Recomendations</button>
+        ) : null }
         {userMonitorData.fetchedData.name ?(
           <div className="monitor-container">
             <h1>{userMonitorData.fetchedData.name}</h1>

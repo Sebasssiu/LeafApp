@@ -29,6 +29,8 @@ import Binnacle from './views/binnacle'
 import Simulation from './views/simulation.js'
 import SimultaionSong from "./views/simulationSong";
 import SimulationListen from "./views/simulationListen";
+import Mongo from "./views/mongo";
+import Recomendations from "./views/recomendations";
 
 export const UserContext = createContext();
 const App = () => {
@@ -124,6 +126,12 @@ const App = () => {
           </Route>
           <Route exact path='/simulationListen'>
             <SimulationListen />
+          </Route>
+          <Route exact path="/mongoInsta">
+            <Mongo />
+          </Route>
+          <Route exact path="/recomendations">
+            <Recomendations />
           </Route>
         </Switch>
       </Router>
